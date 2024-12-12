@@ -24,7 +24,7 @@ namespace PowerFightersXmas.UI
         {
             string? entryMenuInput = string.Empty;
             Console.Clear();
-            GameDisplay.DisplayColourMessage("\tChoose an option:", ConsoleColor.Yellow);
+            GameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
             Console.WriteLine("\t1. Start a new game");
             Console.WriteLine("\t2. Load a game"); // TODO; This requires us to save game states in a file
             Console.WriteLine("\t3. Help / Instructions on how to play the game");
