@@ -8,7 +8,7 @@ namespace PowerFightersXmas.UI
 {
     internal class MainMenu
     {
-        public static void Menu()
+        public static void StartMenu()
         {
             Console.WriteLine("Have fun!");
             Console.ReadKey();

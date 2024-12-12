@@ -12,7 +12,7 @@ namespace PowerFightersXmas
         {
             Console.WriteLine("Hello, World!");
             Console.WriteLine("Hello Marcus");
-            MainMenu.Menu();
+            MainMenu.StartMenu();
         }
     }
 }
