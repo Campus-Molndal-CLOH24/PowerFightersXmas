@@ -1,5 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Reflection;
 
 namespace PowerFightersXmas
@@ -10,9 +9,7 @@ namespace PowerFightersXmas
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
-            Console.WriteLine("Hello Marcus");
-            MainMenu.StartMenu();
+            MainMenu.EntryPoint();
         }
     }
 }
