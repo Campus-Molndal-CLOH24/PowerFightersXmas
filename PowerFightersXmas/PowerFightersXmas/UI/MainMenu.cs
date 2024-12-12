@@ -23,13 +23,59 @@ namespace PowerFightersXmas.UI
         internal static void EntryMenu()
         {
             Console.Clear();
-            Console.WriteLine("Choose an option:");
-            Console.WriteLine("1. Start a new game");
-            Console.WriteLine("2. Load a game"); // TODO; This requires us to save game states in a file
-            Console.WriteLine("3. Help / Instructions on how to play the game");
-            Console.WriteLine("4. Quit (Why would you ever want to do that..? Evil Mage Marcus will come and haunt you forever!)");
+            GameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
+            Console.WriteLine("\t1. Start a new game");
+            Console.WriteLine("\t2. Load a game"); // TODO; This requires us to save game states in a file
+            Console.WriteLine("\t3. Help / Instructions on how to play the game");
+            GameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
-            // Then we need to create menu handlers for navigation and interactions between- and in the various rooms and objects
+            var entryMenuInput = Console.ReadLine();
+            switch (entryMenuInput)
+            {
+                case "1":
+                    StartNewGame();
+                    break;
+                case "2":
+                    LoadGame();
+                    break;
+                case "3":
+                    Instructions();
+                    break;
+                case "4":
+                    GameDisplay.DisplayColourMessage("\n\tGoodbye! Evil Mage Marcus will come and haunt you forever!", ConsoleColor.Red);
+                    break;
+                default:
+                    GameDisplay.DisplayColourMessage("Invalid input. Please try again.", ConsoleColor.Red);
+                    EntryMenu();
+                    break;
+            }
         }
+
+        internal static void StartNewGame()
+        {
+            // TODO; Start a new game
+            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
+            Console.ReadKey();
+            EntryMenu();
+        }
+
+        internal static void LoadGame()
+        {
+            // TODO; Load a game
+            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
+            Console.ReadKey();
+            EntryMenu();
+        }
+
+        internal static void Instructions()
+        {
+            // TODO; Basic instructions on how to play the game
+            Console.WriteLine("Basic instructions will be here.");
+            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
+            Console.ReadKey();
+            EntryMenu();
+        }
+        
+        // TODO; Then we also need to create menu handlers for navigation and interactions between- and in the various rooms and objects
     }
 }
