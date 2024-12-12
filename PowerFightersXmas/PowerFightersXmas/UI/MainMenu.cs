@@ -31,18 +31,5 @@ namespace PowerFightersXmas.UI
 
             // Then we need to create menu handlers for navigation and interactions between- and in the various rooms and objects
         }
-
-        internal static void EntryMenu()
-        {
-            // The inital menu will be giving you options on how to start the game
-
-            Console.Clear();
-            Console.WriteLine("Välj ett alternativ:");
-            Console.WriteLine("1. Starta nytt spel");
-            Console.WriteLine("2. Ladda spel");
-            Console.WriteLine("3. Avsluta");
-
-            // Then we need to create menu handlers for navigation and interactions between- and in the various rooms and objects
-        }
     }
 }
