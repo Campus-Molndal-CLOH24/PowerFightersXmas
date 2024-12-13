@@ -1,12 +1,13 @@
-﻿using System;
+﻿using PowerFightersXmas.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PowerFightersXmas.Data
-{
-    internal class Player
-    {
-    }
+namespace PowerFightersXmas.Data;
+
+ class Player
+{          
+   
 }

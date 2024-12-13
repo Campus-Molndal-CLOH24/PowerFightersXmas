@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data
 {
-    internal class Item
+    public class Item
     {
+        
+
     }
 }
