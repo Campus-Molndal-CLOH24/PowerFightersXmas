@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data;
 
- class Player
+public class Player
 {          
    
 }
