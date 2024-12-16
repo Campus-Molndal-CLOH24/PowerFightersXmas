@@ -8,16 +8,16 @@ namespace PowerFightersXmas.UI
 {
     using PowerFightersXmas.Interface;
 
-    internal class InputHandler
+    public class InputHandler
     {
         private readonly IUserInput _userInput;
 
         public InputHandler(IUserInput userInput)
         {
-            _userInput = userInput;
+            _userInput = userInput ?? throw new ArgumentNullException(nameof(userInput));
         }
 
-        public void EntryMenyInput()
+        public void EntryMenuInput()
         {
             bool isValidInput = false;
             while (!isValidInput)
