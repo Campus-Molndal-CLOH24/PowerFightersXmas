@@ -23,10 +23,10 @@ namespace PowerFightersXmas.Logic
         // Visar spelets nuvarande tillstånd
         public void ShowState()
         {
-            Console.WriteLine($"🎅 Spelare: {Player.Name}");
-            Console.WriteLine($"📍 Nuvarande rum: {CurrentRoom.Name}");
-            Console.WriteLine($"🗺️ Beskrivning: {CurrentRoom.Description}");
-            Console.WriteLine($"🎁 Inventarie: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+            Console.WriteLine($"🎅 Player: {Player.Name}");
+            Console.WriteLine($"📍 Current room: {CurrentRoom.Name}");
+            Console.WriteLine($"🗺️ Description: {CurrentRoom.Description}");
+            Console.WriteLine($"🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
         }
 
         // Lägger till ett föremål i spelarens inventarie
@@ -35,9 +35,9 @@ namespace PowerFightersXmas.Logic
             if (Player.AddItem(item))
             {
                 CurrentRoom.RemoveItem(item);
-                return $"Du har plockat upp {item.Name}.";
+                return $"You have picked up {item.Name}.";
             }
-            return "Din väska är full!";
+            return "Your inventory is full!";
         }
 
         // Flyttar spelaren till ett annat rum
@@ -49,7 +49,7 @@ namespace PowerFightersXmas.Logic
                 CurrentRoom = nextRoom;
                 return $"Du går {direction} och befinner dig nu i {CurrentRoom.Name}.";
             }
-            return "Du kan inte gå dit.";
+            return "You can't go there.";
         }
     }
 }
