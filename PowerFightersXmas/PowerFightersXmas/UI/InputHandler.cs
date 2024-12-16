@@ -14,7 +14,7 @@ namespace PowerFightersXmas.UI
 
         public InputHandler(IUserInput userInput)
         {
-            _userInput = userInput;
+            _userInput = userInput ?? throw new ArgumentNullException(nameof(userInput));
         }
 
         public void EntryMenyInput()
