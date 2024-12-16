@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.UI
 {
+    using PowerFightersXmas.Interface;
+
     internal class MainMenu
     {
         internal static void EntryPoint()
@@ -33,7 +35,8 @@ namespace PowerFightersXmas.UI
             Console.WriteLine("\t3. Help / Instructions on how to play the game");
             GameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
-            InputHandler.EntryMenyInput();
+            var inputHandler = new InputHandler(new ConsoleInput());
+            inputHandler.EntryMenyInput();
         }
 
         internal static void StartNewGame()
