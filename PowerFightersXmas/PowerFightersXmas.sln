@@ -5,7 +5,7 @@ VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerFightersXmas", "PowerFightersXmas\PowerFightersXmas.csproj", "{982C94AC-5149-40DE-BF91-6FDA6D5CB5E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerFightersXmasTest", "PowerFightersXmasTest\PowerFightersXmasTest.csproj", "{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerFightersXmas.Test", "PowerFightersXmasTest\PowerFightersXmas.Test.csproj", "{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

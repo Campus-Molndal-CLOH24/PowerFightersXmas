@@ -1,4 +1,4 @@
-﻿namespace PowerFightersXmasTest
+﻿namespace PowerFightersXmas.Test
 {
     [TestClass]
     public sealed class Test1
