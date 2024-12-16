@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal class Room : Item
+internal class Room 
 {
     public string Name { get; set; }
     public string Description { get; set; }
@@ -19,7 +19,7 @@ internal class Room : Item
         Items = new List<Item>();
         Exits = new Dictionary<string, Room>();
 
-        Room Entrance = new Room("Entrance", "Nice housse with a lot of rooms... \n Oh look Santa");
+        Room Entrance = new Room("Entrance", "Nice house with a lot of rooms... \n Oh look Santa");
 
         Room WC = new Room("WC", "This is the WC... Eww so dirty");
 
@@ -30,11 +30,11 @@ internal class Room : Item
 
         Room Pool = new Room("OutDoor Pool", "This is a pool, it's Frozen solid... \n is that an Elf stuck in the ice");
 
-        Room Office = new Room("Office", "Looks like an ordinery office...");
+        Room Office = new Room("Office", "Looks like an ordinary office...");
 
         Room SecondFloor = new Room("Second Floor Entrance", "Wow this place is big");
 
-        Room Bar = new Room("Looks like a bar...", "This is a room with a pooltable and a fire place... " +
+        Room Bar = new Room("Looks like a bar...", "This is a room with a pool table and a fire place... " +
         "But i need to sart the fire");
 
         Room Balcony = new Room("Balcony", "❄️❄️This place is so cold❄️❄️... Is that a frozen Elf");
