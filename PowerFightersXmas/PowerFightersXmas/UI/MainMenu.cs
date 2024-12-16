@@ -20,35 +20,20 @@ namespace PowerFightersXmas.UI
             EntryMenu();
         }
 
-        internal static void EntryMenu()
+        internal static void EntryMenu(bool clearConsole = true)
         {
-            Console.Clear();
+            if (clearConsole)
+            {
+                Console.Clear();
+            }
+
             GameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
             Console.WriteLine("\t1. Start a new game");
             Console.WriteLine("\t2. Load a game"); // TODO; This requires us to save game states in a file
             Console.WriteLine("\t3. Help / Instructions on how to play the game");
             GameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
-            var entryMenuInput = Console.ReadLine();
-            switch (entryMenuInput)
-            {
-                case "1":
-                    StartNewGame();
-                    break;
-                case "2":
-                    LoadGame();
-                    break;
-                case "3":
-                    Instructions();
-                    break;
-                case "4":
-                    GameDisplay.DisplayColourMessage("\n\tGoodbye! Evil Mage Marcus will come and haunt you forever!", ConsoleColor.Red);
-                    break;
-                default:
-                    GameDisplay.DisplayColourMessage("Invalid input. Please try again.", ConsoleColor.Red);
-                    EntryMenu();
-                    break;
-            }
+            InputHandler.EntryMenyInput();
         }
 
         internal static void StartNewGame()
@@ -75,7 +60,8 @@ namespace PowerFightersXmas.UI
             Console.ReadKey();
             EntryMenu();
         }
-        
+
         // TODO; Then we also need to create menu handlers for navigation and interactions between- and in the various rooms and objects
+        // Those might be implemented in the CommandHandler class?
     }
 }
