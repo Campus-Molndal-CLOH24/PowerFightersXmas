@@ -1,4 +1,5 @@
 ﻿using PowerFightersXmas.Data;
+using PowerFightersXmas.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,32 +8,34 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
-    public class GameState
+    public class GameState : IGameState
     {
-        // Spelets centrala data
+        // Central datastructure for the game state
         public Player Player { get; private set; }
         public Room CurrentRoom { get; set; }
 
-        // Konstruktor för att initiera spelets tillstånd
-        public GameState(Player player, Room startingRoom)
+        // Constructor to initialize the game state
+        public GameState(Player player)
         {
             Player = player;
-            CurrentRoom = startingRoom;
+            CurrentRoom = RoomInformation.InitializeRooms();
         }
 
-        // Visar spelets nuvarande tillstånd
+        // Showing the current state of the game
         public void ShowState()
         {
-            Console.WriteLine($"🎅 Player: {Player.Name}");
-            Console.WriteLine($"📍 Current room: {CurrentRoom.Name}");
-            Console.WriteLine($"🗺️ Description: {CurrentRoom.Description}");
-            Console.WriteLine($"🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+            Console.WriteLine($"\n\t 🎅 Player: {Player.Name}");
+            Console.WriteLine($"\t 📍 Current room: {CurrentRoom.Name}");
+            Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
+            Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
         }
 
-        // Lägger till ett föremål i spelarens inventarie
+        public List<Item> GetCurrentRoomItems() => CurrentRoom.Items;
+
+        // Adding an item to the player's inventory
         public string AddItemToPlayerInventory(Item item)
         {
-            if (Player.Inventory.Count < 5) // Max inventory size är 5
+            if (Player.Inventory.Count < 5) // Max inventory size is 5
             {
                 Player.Inventory.Add(item);
                 CurrentRoom.Items.Remove(item);
@@ -65,18 +68,23 @@ namespace PowerFightersXmas.Logic
             return "You can't go there.";
         }
 
-        // Hämtar ett rum baserat på riktning
+        // Getting a room in a specific direction
         private Room GetRoom(string direction)
         {
-            return CurrentRoom.AdjacentRooms.ContainsKey(direction)
-                ? CurrentRoom.AdjacentRooms[direction]
-                : null;
+            return CurrentRoom.Exits.ContainsKey(direction)
+                ? CurrentRoom.Exits[direction] : new Room("Unknown", "You hit an invisible wall.");
+            // Returning a default room if the direction is invalid, if we want to be able to return null, see below
+
+            //return CurrentRoom.Exits.ContainsKey(direction)
+            //    ? CurrentRoom.Exits[direction] : null;
+
+            // Alternatively, we could throw an exception if the direction is invalid, or have a null check in the MovePlayer method
         }
 
         // Lägger till angränsande rum från GameState
         public void AddAdjacentRoom(Room fromRoom, string direction, Room toRoom)
         {
-            fromRoom.AdjacentRooms[direction] = toRoom;
+            fromRoom.Exits[direction] = toRoom;
         }
     }
 }
