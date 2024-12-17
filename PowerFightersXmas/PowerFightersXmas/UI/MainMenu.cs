@@ -36,7 +36,7 @@ namespace PowerFightersXmas.UI
             GameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
             var inputHandler = new InputHandler(new ConsoleInput());
-            inputHandler.EntryMenyInput();
+            inputHandler.EntryMenuInput();
         }
 
         internal static void StartNewGame()
