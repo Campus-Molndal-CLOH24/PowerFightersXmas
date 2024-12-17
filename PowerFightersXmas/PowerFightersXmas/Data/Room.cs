@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal class Room 
+public class Room 
 {
     public string Name { get; set; }
     public string Description { get; set; }
