@@ -1,10 +1,10 @@
 ﻿namespace PowerFightersXmas.Test
 {
     [TestClass]
-    public sealed class Test1
+    public sealed class PlaceholderTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void PlaceholderTestMethod()
         {
         }
     }

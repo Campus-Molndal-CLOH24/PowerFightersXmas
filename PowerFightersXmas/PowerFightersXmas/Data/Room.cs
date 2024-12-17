@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data
 {
-
     public class Room
     {
         public string Name { get; set; }
@@ -52,7 +51,6 @@ namespace PowerFightersXmas.Data
 
             //Exits.Add("north", basement);
         }
-
     }
 }
 

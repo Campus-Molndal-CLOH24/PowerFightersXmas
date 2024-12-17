@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data
 {
-
     public static class BoxColors
     {
         public const string Red = "Red";
@@ -15,86 +14,85 @@ namespace PowerFightersXmas.Data
 
     public class Item
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public List<Item> Items { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public int quantity { get; set; }
+        public list<item> items { get; set; }
 
 
-        public Item(string name, string description, int quantity = 1)
+        public item(string name, string description, int quantity = 1)
         {
-            Name = name;
-            Description = description;
-            Quantity = quantity > 0 ? quantity : 1;
+            name = name;
+            description = description;
+            quantity = quantity > 0 ? quantity : 1;
 
-            Item Axe = new Item("An Axe", "A sharp axe that can be used for heavy duties", 1);
-            Item Coal = new Item("A sock full of Coal", "Guess someone wasn't a good boy, the might come handy tho", 1);
-            Item Lamp = new Item("A Lamp", "A lamp that can light up the room", 2);
+            item axe = new item("an axe", "a sharp axe that can be used for heavy duties", 1);
+            item coal = new item("a sock full of coal", "guess someone wasn't a good boy, the might come handy tho", 1);
+            item lamp = new item("a lamp", "a lamp that can light up the room", 2);
 
         }
 
-        public void DisplayInfo()
+        public void displayinfo()
         {
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Description: {Description}");
-            Console.WriteLine($"Quantity: {Quantity}");
+            console.writeline($"name: {name}");
+            console.writeline($"description: {description}");
+            console.writeline($"quantity: {quantity}");
         }
 
-        public class Box 
+        public class box
         {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string Colour { get; set; }
-            public List<Item> Items { get; set; }
+            public string name { get; set; }
+            public string description { get; set; }
+            public string colour { get; set; }
+            public list<item> items { get; set; }
 
-            public Box(string name, string description, string colour)
+            public box(string name, string description, string colour)
             {
-                Name = name;
-                Description = description;
-                Colour = colour;
-                Items = new List<Item>();
+                name = name;
+                description = description;
+                colour = colour;
+                items = new list<item>();
 
-                Box Red = new Box("Red Box", "A Box painted in Red with a Yellow ribbon wrapped around it", BoxColors.Red);
-                Box Yellow = new Box("Yellow Box",
-                "A Box covered in yellow glitter, with a golden note attached on the front of the box \n the note reads: Maybe next year",
-                BoxColors.Yellow);
+                box red = new box("red box", "a box painted in red with a yellow ribbon wrapped around it", boxcolors.red);
+                box yellow = new box("yellow box",
+                "a box covered in yellow glitter, with a golden note attached on the front of the box \n the note reads: maybe next year",
+                boxcolors.yellow);
             }
 
-            public void Open()
+            public void open()
             {
-                if (BoxColors.Red == "Red")
+                if (boxcolors.red == "red")
                 {
-                    if (Items.Count == 0)
+                    if (items.count == 0)
                     {
-                        Console.WriteLine("It's empty!");
+                        console.writeline("it's empty!");
                     }
                     else
                     {
-                        Console.WriteLine($"You found the following items inside {Name}:");
-                        foreach (var item in Items)
+                        console.writeline($"you found the following items inside {name}:");
+                        foreach (var item in items)
                         {
-                            Console.WriteLine($"- {item.Name}: {item.Description}");
+                            console.writeline($"- {item.name}: {item.description}");
                         }
                     }
                 }
 
 
-                while (BoxColors.Red == "Red")
+                while (boxcolors.red == "red")
                 {
-                    if (Items.Count == 0)
+                    if (items.count == 0)
                     {
-                        Console.WriteLine("It's empty!");
+                        console.writeline("it's empty!");
                     }
                     else
                     {
-                        Console.WriteLine($"You found the following items inside {Name}:");
-                        foreach (var item in Items)
+                        console.writeline($"you found the following items inside {name}:");
+                        foreach (var item in items)
                         {
-                            Console.WriteLine($"- {item.Name}: {item.Description}");
+                            console.writeline($"- {item.name}: {item.description}");
                         }
                     }
                 }
-
             }
         }
     }

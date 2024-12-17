@@ -26,7 +26,7 @@ namespace PowerFightersXmas.UI
 
         internal static void EntryMenu(bool clearConsole = true)
         {
-            if (clearConsole)
+            if (clearConsole && Console.IsOutputRedirected == false) // Avoid Console.Clear() in tests
             {
                 Console.Clear();
             }
@@ -38,22 +38,20 @@ namespace PowerFightersXmas.UI
             _gameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
             var inputHandler = new InputHandler(new ConsoleInput(), _gameDisplay);
-            inputHandler.EntryMenuInput();
+            inputHandler.EntryMenuInput(restartOnInvalidInput: true, restartMenuAction: () => EntryMenu(false));
         }
 
         internal static void StartNewGame()
         {
             // TODO; Start a new game
-            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
-            Console.ReadKey();
+            Console.WriteLine("To be implemented. Returning to the EntryMenu");
             EntryMenu();
         }
 
         internal static void LoadGame()
         {
             // TODO; Load a game
-            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
-            Console.ReadKey();
+            Console.WriteLine("To be implemented. Returning to the EntryMenu");
             EntryMenu();
         }
 
@@ -61,8 +59,7 @@ namespace PowerFightersXmas.UI
         {
             // TODO; Basic instructions on how to play the game
             Console.WriteLine("Basic instructions will be here.");
-            Console.WriteLine("To be implemented. Returning to the EntryMenu, press any key:");
-            Console.ReadKey();
+            Console.WriteLine("To be implemented. Returning to the EntryMenu");
             EntryMenu();
         }
 

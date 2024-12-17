@@ -19,7 +19,7 @@ namespace PowerFightersXmas.UI
             _gameDisplay= gameDisplay ?? throw new ArgumentNullException(nameof(gameDisplay));
         }
 
-        public void EntryMenuInput()
+        public void EntryMenuInput(bool restartOnInvalidInput = true, Action? restartMenuAction = null)
         {
             bool isValidInput = false;
             while (!isValidInput)
@@ -45,9 +45,13 @@ namespace PowerFightersXmas.UI
                         break;
                     default:
                         _gameDisplay.DisplayColourMessage("Invalid input. Please try again.", ConsoleColor.Red);
-                        Console.WriteLine("Press any key to return to the menu.");
-                        Console.ReadKey();
-                        MainMenu.EntryMenu(false);
+                        _userInput.WaitForKeyPress(); // Using mock instead of Console.ReadKey()
+
+                        // Avoid infinite loop in tests
+                        if (restartOnInvalidInput)
+                        {
+                            restartMenuAction?.Invoke(); // Use an action instead of MainMenu.EntryMenu
+                        }
                         break;
                 }
             }

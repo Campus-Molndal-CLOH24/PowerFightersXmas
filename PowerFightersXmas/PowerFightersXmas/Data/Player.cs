@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data 
 { 
-
-
     public class Player
     {
         public string Name { get; set; }
@@ -22,8 +20,8 @@ namespace PowerFightersXmas.Data
     public int Defense { get; set; }
     */
 
-    public Player(string name)
-    {
+      public Player(string name)
+      {
         Name = name;
         Inventory = new List<Item>();
         Player Maineplayer = new Player("Jedi Bob");
@@ -32,10 +30,10 @@ namespace PowerFightersXmas.Data
          Strength = strength;
          Defense = defense;
         */
-    }
+      }
 
-    public void ShowInventory()
-    {
+      public void ShowInventory()
+      {
         Console.WriteLine($"{Name}'s Inventory:");
         if (Inventory.Count == 0)
         {
@@ -49,6 +47,5 @@ namespace PowerFightersXmas.Data
             }
         }
     }
-    }
+  }
 }
-
