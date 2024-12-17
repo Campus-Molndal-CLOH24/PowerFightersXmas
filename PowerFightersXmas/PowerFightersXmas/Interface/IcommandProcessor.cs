@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Interface
 {
-    internal class IcommandProcessor
+    public interface ICommandProcessor
     {
+        bool ProcessCommand(string command);
     }
 }
