@@ -22,10 +22,9 @@ namespace PowerFightersXmas.Test
             var inputHandler = new InputHandler(mockUserInput, mockGameDisplay);
             // Act
             inputHandler.EntryMenuInput();
-            // Debug: Skriv ut alla meddelanden
+            // Debug: Print all messages to confirm that the correct message is displayed
             Console.WriteLine(string.Join(", ", mockGameDisplay.Messages));
             // Assert
-            // We can't really test the output of the EntryMenuInput method, but we can test that it doesn't throw an exception
             Assert.IsTrue(mockGameDisplay.Messages.Any(message => message.Contains("Goodbye! Evil Mage Marcus will come and haunt you forever!")));
         }
 
@@ -38,9 +37,7 @@ namespace PowerFightersXmas.Test
             var inputHandler = new InputHandler(mockUserInput, mockGameDisplay);
             // Act
             inputHandler.EntryMenuInput(restartOnInvalidInput: false);
-            // inputHandler.EntryMenuInput(restartOnInvalidInput: true, restartMenuAction: () => { }); // Avoid restarting the menu in the test
             // Assert
-            // We can't really test the output of the EntryMenuInput method, but we can test that it doesn't throw an exception
             Assert.IsTrue(mockGameDisplay.Messages.Any(m => m.Contains("Invalid input. Please try again.")));
         }
     }

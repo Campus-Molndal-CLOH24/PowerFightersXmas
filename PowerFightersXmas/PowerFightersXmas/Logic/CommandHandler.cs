@@ -8,75 +8,75 @@ namespace PowerFightersXmas.Logic
 {
     public class CommandHandler
     {
-        //private readonly GameEngine _gameEngine;
+        private readonly GameEngine _gameEngine;
 
-        //public CommandHandler(GameEngine gameEngine)
-        //{
-        //    _gameEngine = gameEngine;
-        //}
+        public CommandHandler(GameEngine gameEngine)
+        {
+            _gameEngine = gameEngine;
+        }
 
-        //public void HandleCommand(string input)
-        //{
-        //    if (string.IsNullOrWhiteSpace(input))
-        //    {
-        //        Console.WriteLine("You need to enter a command!");
-        //        return;
-        //    }
+        public void HandleCommand(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("You need to enter a command!");
+                return;
+            }
 
-        //    var parts = input.ToLower().Split(' ');
-        //    var action = parts[0];
+            var parts = input.ToLower().Split(' ');
+            var action = parts[0];
 
-        //    switch (action)
-        //    {
-        //        case "go":
-        //            HandleGoCommand(parts);
-        //            break;
+            switch (action)
+            {
+                case "go":
+                    HandleGoCommand(parts);
+                    break;
 
-        //        case "look":
-        //            _gameEngine.ShowState();
-        //            break;
+                case "look":
+                    _gameEngine.ShowState();
+                    break;
 
-        //        case "take":
-        //            HandleTakeCommand(parts);
-        //            break;
+                case "take":
+                    HandleTakeCommand(parts);
+                    break;
 
-        //        case "quit":
-        //            _gameEngine.StopGame();
-        //            break;
+                case "quit":
+                    _gameEngine.StopGame();
+                    break;
 
-        //        default:
-        //            Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
-        //            break;
-        //    }
-        //}
+                default:
+                    Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
+                    break;
+            }
+        }
 
-        //private void HandleGoCommand(string[] parts)
-        //{
-        //    if (parts.Length > 1)
-        //    {
-        //        var direction = parts[1];
-        //        var result = _gameEngine.MovePlayer(direction);
-        //        Console.WriteLine(result);
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Please specify a direction, e.g., 'go north'.");
-        //    }
-        //}
+        private void HandleGoCommand(string[] parts)
+        {
+            if (parts.Length > 1)
+            {
+                var direction = parts[1];
+                var result = _gameEngine.MovePlayer(direction);
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine("Please specify a direction, e.g., 'go north'.");
+            }
+        }
 
-        //private void HandleTakeCommand(string[] parts)
-        //{
-        //    if (parts.Length > 1)
-        //    {
-        //        var itemName = string.Join(" ", parts[1..]); // Combine all parts after "take"
-        //        var result = _gameEngine.TakeItem(itemName);
-        //        Console.WriteLine(result);
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("Please specify the item you want to take, e.g., 'take hammer'.");
-        //    }
-        //}
+        private void HandleTakeCommand(string[] parts)
+        {
+            if (parts.Length > 1)
+            {
+                var itemName = string.Join(" ", parts[1..]); // Combine all parts after "take"
+                var result = _gameEngine.TakeItem(itemName);
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine("Please specify the item you want to take, e.g., 'take hammer'.");
+            }
+        }
     }
 
 }

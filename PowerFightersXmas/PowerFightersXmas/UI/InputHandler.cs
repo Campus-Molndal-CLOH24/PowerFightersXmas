@@ -50,7 +50,7 @@ namespace PowerFightersXmas.UI
                         // Avoid infinite loop in tests
                         if (restartOnInvalidInput)
                         {
-                            restartMenuAction?.Invoke(); // Använd en action istället för MainMenu.EntryMenu
+                            restartMenuAction?.Invoke(); // Use an action instead of MainMenu.EntryMenu
                         }
                         break;
                 }

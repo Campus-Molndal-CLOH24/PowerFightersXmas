@@ -36,7 +36,7 @@ namespace PowerFightersXmas.UI
             {
                 gameDisplay.DisplayColourMessage("Input field cannot be empty. Please write something!", ConsoleColor.Red);
                 Console.Write(prompt);
-                input = Console.ReadLine(); // Be very mindful to TEST this properly!
+                input = Console.ReadLine();
             }
             return input;
         }

@@ -9,7 +9,7 @@ namespace PowerFightersXmas.Interface
     public interface IUserInput
     {
         string? GetInput();
-        void WaitForKeyPress(); // Added method to mock Console.ReadKey() during testing
+        void WaitForKeyPress(); // Method to mock Console.ReadKey() during testing
     }
 
     public class ConsoleInput : IUserInput
