@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
-    using System;
-
     public class CommandHandler
     {
         private readonly GameEngine _gameEngine;

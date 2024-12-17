@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
-    internal class GameEngine
+    public class GameEngine
     {
         private readonly GameState _gameState;
         private bool _isRunning;
