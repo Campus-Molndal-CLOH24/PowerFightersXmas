@@ -22,7 +22,12 @@ namespace PowerFightersXmas.Test
 
         public string? GetInput()
         {
-            return _inputQueue.Count > 0 ? _inputQueue.Dequeue() : null;
+            return _inputQueue.Count > 0 ? _inputQueue.Dequeue() : "4"; // Finish with a valid input to avoid an infinite loop
+        }
+
+        public void WaitForKeyPress()
+        {
+            // Do nothing in the tests, to simulate Console.ReadKey()
         }
     }
 }

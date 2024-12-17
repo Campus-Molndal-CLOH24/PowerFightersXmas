@@ -5,49 +5,52 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal class Room 
+namespace PowerFightersXmas.Data
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public List<Item> Items { get; private set; }
-    public Dictionary<string, Room> Exits { get; private set; }
-
-    public Room(string name, string description)
+    public class Room 
     {
-        Name = name;
-        Description = description;
-        Items = new List<Item>();
-        Exits = new Dictionary<string, Room>();
+    //public string Name { get; set; }
+    //public string Description { get; set; }
+    //public List<Item> Items { get; private set; }
+    //public Dictionary<string, Room> Exits { get; private set; }
+    //}
 
-        Room Entrance = new Room("Entrance", "Nice house with a lot of rooms... \n Oh look Santa");
+    //public Room(string name, string description)
+    //{
+    //    Name = name;
+    //    Description = description;
+    //    Items = new List<Item>();
+    //    Exits = new Dictionary<string, Room>();
 
-        Room WC = new Room("WC", "This is the WC... Eww so dirty");
+    //    Room Entrance = new Room("Entrance", "Nice house with a lot of rooms... \n Oh look Santa");
 
-        Room Kitchen = new Room("Kitchen", "This is the kitchen, it's a mess");
+    //    Room WC = new Room("WC", "This is the WC... Eww so dirty");
 
-        Room LivingRoom = new Room("Living Room",
-        "This is the living room, it's a cozy place \n you can use the stairs to enter the second Floor");
+    //    Room Kitchen = new Room("Kitchen", "This is the kitchen, it's a mess");
 
-        Room Pool = new Room("OutDoor Pool", "This is a pool, it's Frozen solid... \n is that an Elf stuck in the ice");
+    //    Room LivingRoom = new Room("Living Room",
+    //    "This is the living room, it's a cozy place \n you can use the stairs to enter the second Floor");
 
-        Room Office = new Room("Office", "Looks like an ordinary office...");
+    //    Room Pool = new Room("OutDoor Pool", "This is a pool, it's Frozen solid... \n is that an Elf stuck in the ice");
 
-        Room SecondFloor = new Room("Second Floor Entrance", "Wow this place is big");
+    //    Room Office = new Room("Office", "Looks like an ordinary office...");
 
-        Room Bar = new Room("Looks like a bar...", "This is a room with a pool table and a fire place... " +
-        "But i need to sart the fire");
+    //    Room SecondFloor = new Room("Second Floor Entrance", "Wow this place is big");
 
-        Room Balcony = new Room("Balcony", "❄️❄️This place is so cold❄️❄️... Is that a frozen Elf");
+    //    Room Bar = new Room("Looks like a bar...", "This is a room with a pool table and a fire place... " +
+    //    "But i need to sart the fire");
 
-        Room Bedroom = new Room("Bedroom", "This is a bedroom, it's a mess guess some one wasn't a good kid this Xmas");
+    //    Room Balcony = new Room("Balcony", "❄️❄️This place is so cold❄️❄️... Is that a frozen Elf");
 
-        Room basement = new Room("Basement",
-        "This place is so dark you can't see anything... \n I need to find a lamp");
+    //    Room Bedroom = new Room("Bedroom", "This is a bedroom, it's a mess guess some one wasn't a good kid this Xmas");
 
-        /*basement.Items.Add(new Item("Tomteverkstadens nyckel",
-         "En nyckel som ser ut att passa i en dörr."));*/
+    //    Room basement = new Room("Basement",
+    //    "This place is so dark you can't see anything... \n I need to find a lamp");
 
-        //Exits.Add("north", basement);
+    //    /*basement.Items.Add(new Item("Tomteverkstadens nyckel",
+    //     "En nyckel som ser ut att passa i en dörr."));*/
+
+    //    //Exits.Add("north", basement);
     }
 
 }
