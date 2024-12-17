@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerFightersXmas.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,24 +32,51 @@ namespace PowerFightersXmas.Logic
         // Lägger till ett föremål i spelarens inventarie
         public string AddItemToPlayerInventory(Item item)
         {
-            if (Player.AddItem(item))
+            if (Player.Inventory.Count < 5) // Max inventory size är 5
             {
-                CurrentRoom.RemoveItem(item);
+                Player.Inventory.Add(item);
+                CurrentRoom.Items.Remove(item);
                 return $"You have picked up {item.Name}.";
             }
             return "Your inventory is full!";
         }
 
+        // Tar bort ett föremål från spelarens inventarie
+        public string RemoveItemFromPlayerInventory(Item item)
+        {
+            if (Player.Inventory.Contains(item))
+            {
+                Player.Inventory.Remove(item);
+                CurrentRoom.Items.Add(item);
+                return $"You have dropped {item.Name}.";
+            }
+            return "You don't have that item!";
+        }
+
         // Flyttar spelaren till ett annat rum
         public string MovePlayer(string direction)
         {
-            var nextRoom = CurrentRoom.GetRoom(direction);
+            var nextRoom = GetRoom(direction);
             if (nextRoom != null)
             {
                 CurrentRoom = nextRoom;
-                return $"Du går {direction} och befinner dig nu i {CurrentRoom.Name}.";
+                return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
             }
             return "You can't go there.";
+        }
+
+        // Hämtar ett rum baserat på riktning
+        private Room GetRoom(string direction)
+        {
+            return CurrentRoom.AdjacentRooms.ContainsKey(direction)
+                ? CurrentRoom.AdjacentRooms[direction]
+                : null;
+        }
+
+        // Lägger till angränsande rum från GameState
+        public void AddAdjacentRoom(Room fromRoom, string direction, Room toRoom)
+        {
+            fromRoom.AdjacentRooms[direction] = toRoom;
         }
     }
 }

@@ -10,22 +10,18 @@ namespace PowerFightersXmas.Logic
     public class GameEngine : IGameEngine
     {
         private readonly IGameState _gameState;
-        private readonly ICommandProcessor _commandProcessor;
+        private readonly ICommandHandler _commandHandler;
         private bool _isRunning;
 
-        public GameEngine(IGameState gameState, ICommandProcessor commandProcessor)
+        public GameEngine(IGameState gameState, ICommandHandler commandHandler)
         {
             _gameState = gameState;
-            _commandProcessor = commandProcessor;
+            _commandHandler = commandHandler;
             _isRunning = true;
         }
 
         public void Run()
-        {
-            Console.WriteLine("🎄 Welcome to Santa's Code Adventure! 🎄");
-            Console.WriteLine($"🎅 Hello, {_gameState.Player.Name}!");
-            Console.WriteLine($"📍 You are starting in {_gameState.CurrentRoom.Name}.\n");
-
+        {  
             // Main game loop
             while (_isRunning)
             {
@@ -34,7 +30,7 @@ namespace PowerFightersXmas.Logic
 
                 if (!string.IsNullOrWhiteSpace(input))
                 {
-                    var shouldStop = _commandProcessor.ProcessCommand(input);
+                    var shouldStop = _commandHandler.ProcessCommand(input);
 
                     if (shouldStop)
                     {
