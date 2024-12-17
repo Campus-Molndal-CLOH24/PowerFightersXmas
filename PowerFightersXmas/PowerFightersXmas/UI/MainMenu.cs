@@ -10,14 +10,16 @@ namespace PowerFightersXmas.UI
 
     internal class MainMenu
     {
+        private static IGameDisplay _gameDisplay = new GameDisplay.ConsoleGameDisplay();
+
         internal static void EntryPoint()
         {
-            GameDisplay.PrintCenteredText(" ______________________________________________________", ConsoleColor.Green);
-            GameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
-            GameDisplay.PrintCenteredText(" | Welcome to the Power Fighters Christmas adventure! |", ConsoleColor.Green);
-            GameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
-            GameDisplay.PrintCenteredText(" |       Press any key to get on with the show..      |", ConsoleColor.Green);
-            GameDisplay.PrintCenteredText(" |____________________________________________________|", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" ______________________________________________________", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" | Welcome to the Power Fighters Christmas adventure! |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |       Press any key to get on with the show..      |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |____________________________________________________|", ConsoleColor.Green);
             Console.ReadKey();
             EntryMenu();
         }
@@ -29,13 +31,13 @@ namespace PowerFightersXmas.UI
                 Console.Clear();
             }
 
-            GameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
+            _gameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
             Console.WriteLine("\t1. Start a new game");
             Console.WriteLine("\t2. Load a game"); // TODO; This requires us to save game states in a file
             Console.WriteLine("\t3. Help / Instructions on how to play the game");
-            GameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
+            _gameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
-            var inputHandler = new InputHandler(new ConsoleInput());
+            var inputHandler = new InputHandler(new ConsoleInput(), _gameDisplay);
             inputHandler.EntryMenuInput();
         }
 
