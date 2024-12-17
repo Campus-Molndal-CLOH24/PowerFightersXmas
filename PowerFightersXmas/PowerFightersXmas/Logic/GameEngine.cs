@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
-    public class GameEngine
+    public class GameEngine : IGameEngine
     {
         private readonly IGameState _gameState;
         private readonly ICommandProcessor _commandProcessor;
@@ -31,13 +31,17 @@ namespace PowerFightersXmas.Logic
             {
                 Console.Write("> "); // Player input prompt
                 var input = Console.ReadLine();
-                if (input != null)
+
+                if (!string.IsNullOrWhiteSpace(input))
                 {
-                    _isRunning = _commandProcessor.ProcessCommand(input);
+                    var shouldStop = _commandProcessor.ProcessCommand(input);
+
+                    if (shouldStop)
+                    {
+                        StopGame(); // GameEngine själv hanterar stoppet
+                    }
                 }
             }
-
-            Console.WriteLine("🎅 The game has ended. Thank you for playing!");
         }
 
         public void StopGame()

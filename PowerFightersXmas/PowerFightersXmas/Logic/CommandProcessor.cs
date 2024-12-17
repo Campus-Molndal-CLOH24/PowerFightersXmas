@@ -21,7 +21,7 @@ namespace PowerFightersXmas.Logic
             if (string.IsNullOrWhiteSpace(command))
             {
                 Console.WriteLine("You need to enter a command!");
-                return true; // Continue running
+                return false; // Fortsätt spelet
             }
 
             var parts = command.ToLower().Split(' ');
@@ -42,15 +42,15 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "quit":
-                    StopGame();
-                    return false; // Stop running the game
+                    Console.WriteLine("🎅 Quitting the game...");
+                    return true; // Signalera att spelet ska avslutas
 
                 default:
                     Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
                     break;
             }
 
-            return true; // Continue running
+            return false; // Fortsätt spelet
         }
 
         private void HandleGoCommand(string[] parts)
@@ -78,11 +78,6 @@ namespace PowerFightersXmas.Logic
             {
                 Console.WriteLine("Please specify the item you want to take, e.g., 'take hammer'.");
             }
-        }
-
-        public void StopGame()
-        {
-            Console.WriteLine("🎅 The game has been stopped. Goodbye!");
         }
     }
 }
