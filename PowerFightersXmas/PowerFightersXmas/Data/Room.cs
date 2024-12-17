@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data
 {
-    public class Room 
+    public class Room
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Item> Items { get; private set; }
         public Dictionary<string, Room> Exits { get; private set; }
-    }
 
-    public Room(string name, string description)
+        public Room(string name, string description)
         {
             Name = name;
             Description = description;
@@ -52,6 +51,6 @@ namespace PowerFightersXmas.Data
 
             //Exits.Add("north", basement);
         }
-
     }
+}
 
