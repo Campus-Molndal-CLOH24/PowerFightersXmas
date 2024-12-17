@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Data
 {
@@ -14,89 +11,98 @@ namespace PowerFightersXmas.Data
 
     public class Item
     {
-        public string name { get; set; }
-        public string description { get; set; }
-        public int quantity { get; set; }
-        public list<item> items { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Quantity { get; set; }
+        public List<Item> Items { get; set; }= new List<Item>();
 
-
-        public item(string name, string description, int quantity = 1)
+        public Item(string name, string description, int quantity = 1)
         {
-            name = name;
-            description = description;
-            quantity = quantity > 0 ? quantity : 1;
+            Name = name;
+            Description = description;
+            Quantity = quantity > 0 ? quantity : 1;
 
-            item axe = new item("an axe", "a sharp axe that can be used for heavy duties", 1);
-            item coal = new item("a sock full of coal", "guess someone wasn't a good boy, the might come handy tho", 1);
-            item lamp = new item("a lamp", "a lamp that can light up the room", 2);
-
+            var axe = new Item("An Axe", "A sharp axe that can be used for heavy duties", 1);
+            var coal = new Item("A Sock Full of Coal", "Guess someone wasn't a good kid!", 1);
+            var lamp = new Item("A Lamp", "A lamp that can light up the room", 2);
         }
 
-        public void displayinfo()
+        public void DisplayInfo()
         {
-            console.writeline($"name: {name}");
-            console.writeline($"description: {description}");
-            console.writeline($"quantity: {quantity}");
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Quantity: {Quantity}");
         }
 
-        public class box
+        public class Box
         {
-            public string name { get; set; }
-            public string description { get; set; }
-            public string colour { get; set; }
-            public list<item> items { get; set; }
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public string Colour { get; set; }
+            public List<Item> Items { get; set; } = new List<Item>();
 
-            public box(string name, string description, string colour)
+            public Box(string name, string description, string colour)
             {
-                name = name;
-                description = description;
-                colour = colour;
-                items = new list<item>();
+                Name = name;
+                Description = description;
+                Colour = colour;
+                Items = new List<Item>();
 
-                box red = new box("red box", "a box painted in red with a yellow ribbon wrapped around it", boxcolors.red);
-                box yellow = new box("yellow box",
-                "a box covered in yellow glitter, with a golden note attached on the front of the box \n the note reads: maybe next year",
-                boxcolors.yellow);
+                // Skapa exempelboxar
+                var redBox = new Box("Red Box", "A box painted red with a yellow ribbon", BoxColors.Red);
+                var yellowBox = new Box("Yellow Box", "A box covered in glitter with a note saying 'Better luck next year!'", BoxColors.Yellow);
             }
 
-            public void open()
+            public void Open()
             {
-                if (boxcolors.red == "red")
+                if (Items.Count == 0)
                 {
-                    if (items.count == 0)
+                    Console.WriteLine("It's empty!");
+                }
+                else
+                {
+                    Console.WriteLine($"You found the following items inside {Name}:");
+                    foreach (var item in Items)
                     {
-                        console.writeline("it's empty!");
-                    }
-                    else
-                    {
-                        console.writeline($"you found the following items inside {name}:");
-                        foreach (var item in items)
-                        {
-                            console.writeline($"- {item.name}: {item.description}");
-                        }
+                        Console.WriteLine($"- {item.Name}: {item.Description}");
                     }
                 }
 
+                // The code below creates infinite loops so I adjusted it to the above code, let me know if you want me to revert it back to the original code. /NH
 
-                while (boxcolors.red == "red")
-                {
-                    if (items.count == 0)
-                    {
-                        console.writeline("it's empty!");
-                    }
-                    else
-                    {
-                        console.writeline($"you found the following items inside {name}:");
-                        foreach (var item in items)
-                        {
-                            console.writeline($"- {item.name}: {item.description}");
-                        }
-                    }
-                }
+                //if (BoxColors.Red == "red")
+                //{
+                //    if (Items.Count == 0)
+                //    {
+                //        Console.WriteLine("it's empty!");
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine($"you found the following items inside {Name}:");
+                //        foreach (var item in Items)
+                //        {
+                //            Console.WriteLine($"- {item.Name}: {item.Description}");
+                //        }
+                //    }
+                //}
+
+
+                //while (BoxColors.Red == "red")
+                //{
+                //    if (Items.Count == 0)
+                //    {
+                //        Console.WriteLine("it's empty!");
+                //    }
+                //    else
+                //    {
+                //        Console.WriteLine($"you found the following items inside {Name}:");
+                //        foreach (var item in Items)
+                //        {
+                //            Console.WriteLine($"- {item.Name}: {item.Description}");
+                //        }
+                //    }
+                //}
             }
         }
     }
 }
-    
-
-            

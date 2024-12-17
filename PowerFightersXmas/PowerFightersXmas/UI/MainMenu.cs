@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.UI
 {
+    using PowerFightersXmas.Data;
     using PowerFightersXmas.Interface;
+    using PowerFightersXmas.Logic;
 
     internal class MainMenu
     {
@@ -43,9 +45,20 @@ namespace PowerFightersXmas.UI
 
         internal static void StartNewGame()
         {
-            // TODO; Start a new game
-            Console.WriteLine("To be implemented. Returning to the EntryMenu");
-            EntryMenu();
+            // Create a new player and the game state, which means the room, items, etc.
+            var player = new Player("Jedi Bob"); // TODO; Implement player creation
+            var gameState = new GameState(player);
+            var commandHandler = new CommandHandler(gameState);
+
+            // Console.Clear(); // TODO: Clear the console before starting the game - keep this commented out while in development
+            Console.WriteLine("\n\t🎄 Welcome to the Power Fighters Christmas Adventure! 🎅");
+            Console.WriteLine("\t Get ready to explore and have fun...\n");
+
+            // Show the initial state of the game
+            gameState.ShowState();
+
+            var gameEngine = new GameEngine(gameState, commandHandler);
+            gameEngine.Run();
         }
 
         internal static void LoadGame()

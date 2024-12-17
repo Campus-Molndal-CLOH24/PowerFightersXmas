@@ -1,5 +1,4 @@
-﻿using PowerFightersXmas.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
+    using PowerFightersXmas.Interface;
+
     public class GameEngine : IGameEngine
     {
         private readonly IGameState _gameState;
