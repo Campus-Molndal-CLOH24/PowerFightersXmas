@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PowerFightersXmas.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +7,24 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
-    public class CommandHandler
+    public class CommandHandler : ICommandHandler
     {
-        private readonly GameEngine _gameEngine;
+        private readonly IGameState _gameState;
 
-        public CommandHandler(GameEngine gameEngine)
+        public CommandHandler(IGameState gameState)
         {
-            _gameEngine = gameEngine;
+            _gameState = gameState;
         }
 
-        public void HandleCommand(string input)
+        public bool ProcessCommand(string command)
         {
-            if (string.IsNullOrWhiteSpace(input))
+            if (string.IsNullOrWhiteSpace(command))
             {
                 Console.WriteLine("You need to enter a command!");
-                return;
+                return false; // Fortsätt spelet
             }
 
-            var parts = input.ToLower().Split(' ');
+            var parts = command.ToLower().Split(' ');
             var action = parts[0];
 
             switch (action)
@@ -33,7 +34,7 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "look":
-                    _gameEngine.ShowState();
+                    _gameState.ShowState();
                     break;
 
                 case "take":
@@ -41,36 +42,37 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "quit":
-                    _gameEngine.StopGame();
-                    break;
+                    Console.WriteLine("🎅 Quitting the game...");
+                    return true; // Signalera att spelet ska avslutas
 
                 default:
                     Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
                     break;
             }
+
+            return false; // Fortsätt spelet
         }
 
         private void HandleGoCommand(string[] parts)
         {
             if (parts.Length > 1)
-            {
-                var direction = parts[1];
-                var result = _gameEngine.MovePlayer(direction);
-                Console.WriteLine(result);
-            }
+                Console.WriteLine(_gameState.MovePlayer(parts[1]));
             else
-            {
                 Console.WriteLine("Please specify a direction, e.g., 'go north'.");
-            }
         }
 
         private void HandleTakeCommand(string[] parts)
         {
             if (parts.Length > 1)
             {
-                var itemName = string.Join(" ", parts[1..]); // Combine all parts after "take"
-                var result = _gameEngine.TakeItem(itemName);
-                Console.WriteLine(result);
+                var itemName = string.Join(" ", parts[1..]);
+                var item = _gameState.GetCurrentRoomItems()
+                    .FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
+
+                if (item != null)
+                    Console.WriteLine(_gameState.AddItemToPlayerInventory(item));
+                else
+                    Console.WriteLine($"There is no '{itemName}' here.");
             }
             else
             {
@@ -78,5 +80,4 @@ namespace PowerFightersXmas.Logic
             }
         }
     }
-
 }
