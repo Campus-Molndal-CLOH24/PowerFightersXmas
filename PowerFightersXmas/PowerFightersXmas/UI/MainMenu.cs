@@ -86,10 +86,10 @@ namespace PowerFightersXmas.UI
 
         internal static void Instructions(bool isInstructionsMenu)
         {
-            _gameDisplay.PrintCenteredText(" ______________________________________________________", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |        Instructions on how to play the game        |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |____________________________________________________|", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\n\t ______________________________________________________", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\t |                                                    |", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\t |        Instructions on how to play the game        |", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\t |____________________________________________________|", ConsoleColor.Green);
 
             _gameDisplay.DisplayColourMessage("\n\tGo + direction (north, south, east, west, up, down) will help you move between rooms.", ConsoleColor.Cyan);
             _gameDisplay.DisplayColourMessage("\tLook will show you the current room and its contents.", ConsoleColor.Cyan);

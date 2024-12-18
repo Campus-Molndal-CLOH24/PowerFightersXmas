@@ -1,6 +1,4 @@
-﻿using PowerFightersXmas.Data;
-using PowerFightersXmas.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
+    using PowerFightersXmas.Data;
+    using PowerFightersXmas.Interface;
+    using PowerFightersXmas.UI;
+
     public class GameState : IGameState
     {
         // Central datastructure for the game state
@@ -29,10 +31,17 @@ namespace PowerFightersXmas.Logic
         // Showing the current state of the game
         public void ShowState()
         {
-            Console.WriteLine($"\n\t 🎅 Player: {Player.Name}");
+            // Console.WriteLine($"\n\t 🎅 Player: {Player.Name}");
             Console.WriteLine($"\t 📍 Current room: {CurrentRoom.Name}");
             Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
-            Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+            // TODO: Print an ASCII map plus mark the current room with a 🎅
+            // Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+
+            // Print the map of the room
+            var mapHandler = new MapHandler();
+            mapHandler.DisplayMap(CurrentRoom.Name);
+
+            Console.WriteLine($"\n🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
         }
 
         public List<Item> GetCurrentRoomItems() => CurrentRoom.Items;
@@ -70,7 +79,10 @@ namespace PowerFightersXmas.Logic
                 CurrentRoom = nextRoom;
                 return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
             }
-            return "You can't go there.";
+            else
+            {
+                return "You can't go there.";
+            }
         }
 
         // Getting a room in a specific direction
