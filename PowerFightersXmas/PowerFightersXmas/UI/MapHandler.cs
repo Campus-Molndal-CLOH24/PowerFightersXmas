@@ -11,19 +11,21 @@ namespace PowerFightersXmas.UI
         public void DisplayMap(string currentRoom)
         {
             string[] asciiMap = {
-        "+---------------------------+",
-        "| Living Room    | Kitchen  | Office       |",
-        "|     {0}         |    {1}     |      {2}       |",
-        "|     ↑          |          |              |",
-        "|     W          |    N     |     N        |",
-        "|   ENTER -->    +----------+  \"Choose\"    |",
-        "|     S          |          |   Door -->   |",
-        "|                |          |              |",
-        "+----------------+----------+--------------+",
-        "                        |    WC           |",
-        "                        |                 |",
-        "                        +-----------------+",
-        "                            Outside       "
+         "+---------------------------------+",
+          "|  Living   |   Kitchen  | Office |",
+          "|   Room    |            |        |",
+          "|   {0}       |    {1}       |     {2}  |",
+          "|           |            |        |",
+          "|           +            +        |",
+          "|           |            |        |",
+          "|           |            |        |",
+          "!                 ↑           ----+",
+          "!                 N               |",
+          "!           !  W ENTER E |   WC   |",
+          "!           !     S      !        !",
+          "+------------            ----------",
+          "             !  Outside !          ",
+
     };
 
             string livingRoom = currentRoom == "Living Room" ? "🎅" : " ";
