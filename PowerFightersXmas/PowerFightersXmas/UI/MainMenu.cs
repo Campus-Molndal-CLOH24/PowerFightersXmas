@@ -59,13 +59,29 @@ namespace PowerFightersXmas.UI
 
             var gameEngine = new GameEngine(gameState, commandHandler);
             gameEngine.Run();
+
+            SaveOptions(gameState);
         }
 
         internal static void LoadGame()
         {
-            // TODO; Load a game
-            Console.WriteLine("To be implemented. Returning to the EntryMenu");
-            EntryMenu();
+            var gameState = GameState.LoadGameState();
+            if (gameState != null)
+            {
+                var commandHandler = new CommandHandler(gameState);
+                var gameEngine = new GameEngine(gameState, commandHandler);
+
+                Console.Clear();
+                Console.WriteLine("🎄 Welcome back! Let's continue your adventure. 🎮\n");
+                gameState.ShowState();
+
+                gameEngine.Run();
+            }
+            else
+            {
+                Console.WriteLine("Returning to the main menu.");
+                EntryMenu();
+            }
         }
 
         internal static void Instructions()
@@ -78,5 +94,15 @@ namespace PowerFightersXmas.UI
 
         // TODO; Then we also need to create menu handlers for navigation and interactions between- and in the various rooms and objects
         // Those might be implemented in the CommandHandler class?
+
+        private static void SaveOptions(GameState gameState)
+        {
+            _gameDisplay.DisplayColourMessage("\n\tDo you want to save the game? (Y/N): ", ConsoleColor.Yellow);
+            var saveGame = Console.ReadLine();
+            if (saveGame?.ToUpper() == "Y")
+            {
+                gameState.SaveGameState();
+            }
+        }
     }
 }
