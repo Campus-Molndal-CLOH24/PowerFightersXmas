@@ -84,16 +84,32 @@ namespace PowerFightersXmas.UI
             }
         }
 
-        internal static void Instructions()
+        internal static void Instructions(bool isInstructionsMenu)
         {
-            // TODO; Basic instructions on how to play the game
-            Console.WriteLine("Basic instructions will be here.");
-            Console.WriteLine("To be implemented. Returning to the EntryMenu");
-            EntryMenu();
-        }
+            _gameDisplay.PrintCenteredText(" ______________________________________________________", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |        Instructions on how to play the game        |", ConsoleColor.Green);
+            _gameDisplay.PrintCenteredText(" |____________________________________________________|", ConsoleColor.Green);
 
-        // TODO; Then we also need to create menu handlers for navigation and interactions between- and in the various rooms and objects
-        // Those might be implemented in the CommandHandler class?
+            _gameDisplay.DisplayColourMessage("\n\tGo + direction (north, south, east, west, up, down) will help you move between rooms.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\tLook will show you the current room and its contents.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\tTake + item name will help you pick up items in the room.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\tQuit will exit the game.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\tType info while in the game to display these instructions again.", ConsoleColor.Cyan);
+
+            _gameDisplay.DisplayColourMessage("\n\tPress any key to continue..", ConsoleColor.Yellow);
+            Console.ReadKey();
+
+            // Try which path the user visited the instructions menu from and return to that path
+            if (isInstructionsMenu)
+            {
+                EntryMenu();
+            }
+            else
+            {
+                _gameDisplay.DisplayColourMessage("\n\tReturning to the game.", ConsoleColor.Yellow);
+            }
+        }
 
         private static void SaveOptions(GameState gameState)
         {

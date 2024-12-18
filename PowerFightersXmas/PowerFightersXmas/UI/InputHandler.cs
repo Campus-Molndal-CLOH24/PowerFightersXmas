@@ -36,7 +36,7 @@ namespace PowerFightersXmas.UI
                         isValidInput = true;
                         break;
                     case "3":
-                        MainMenu.Instructions();
+                        MainMenu.Instructions(true);
                         isValidInput = true;
                         break;
                     case "4":
