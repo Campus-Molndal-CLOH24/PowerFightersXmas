@@ -1,4 +1,5 @@
 ﻿using PowerFightersXmas.Interface;
+using PowerFightersXmas.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,10 @@ namespace PowerFightersXmas.Logic
                 case "quit":
                     Console.WriteLine("🎅 Quitting the game...");
                     return true; // Signalera att spelet ska avslutas
+
+                case "info":
+                    MainMenu.Instructions(false);
+                    break;
 
                 default:
                     Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
