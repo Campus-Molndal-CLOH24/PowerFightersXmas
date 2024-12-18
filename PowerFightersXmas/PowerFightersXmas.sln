@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerFightersXmas", "PowerFightersXmas\PowerFightersXmas.csproj", "{982C94AC-5149-40DE-BF91-6FDA6D5CB5E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerFightersXmas", "PowerFightersXmas\PowerFightersXmas.csproj", "{982C94AC-5149-40DE-BF91-6FDA6D5CB5E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerFightersXmas.Test", "PowerFightersXmasTest\PowerFightersXmas.Test.csproj", "{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PowerFightersXmas.Test", "PowerFightersXmasTest\PowerFightersXmas.Test.csproj", "{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlayerTests.cs", "PlayerTests.cs\PlayerTests.cs.csproj", "{F449F98F-CEDB-45F4-864D-F854835204D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4825F0FD-C7E6-4A3A-A8B1-A0271870865F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F449F98F-CEDB-45F4-864D-F854835204D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F449F98F-CEDB-45F4-864D-F854835204D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F449F98F-CEDB-45F4-864D-F854835204D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F449F98F-CEDB-45F4-864D-F854835204D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F25C18BE-FCB6-4C1F-AAB0-76F5EE047B50}
 	EndGlobalSection
 EndGlobal

@@ -22,9 +22,9 @@ namespace PowerFightersXmas.Data
             Description = description;
             Quantity = quantity > 0 ? quantity : 1;
 
-            var axe = new Item("An Axe", "A sharp axe that can be used for heavy duties", 1);
-            var coal = new Item("A Sock Full of Coal", "Guess someone wasn't a good kid!", 1);
-            var lamp = new Item("A Lamp", "A lamp that can light up the room", 2);
+            //var axe = new Item("An Axe", "A sharp axe that can be used for heavy duties", 1);
+            //var coal = new Item("A Sock Full of Coal", "Guess someone wasn't a good kid!", 1);
+            //var lamp = new Item("A Lamp", "A lamp that can light up the room", 2);
         }
 
         public void DisplayInfo()
@@ -49,8 +49,8 @@ namespace PowerFightersXmas.Data
                 Items = new List<Item>();
 
                 // Skapa exempelboxar
-                var redBox = new Box("Red Box", "A box painted red with a yellow ribbon", BoxColors.Red);
-                var yellowBox = new Box("Yellow Box", "A box covered in glitter with a note saying 'Better luck next year!'", BoxColors.Yellow);
+                //var redBox = new Box("Red Box", "A box painted red with a yellow ribbon", BoxColors.Red);
+                //var yellowBox = new Box("Yellow Box", "A box covered in glitter with a note saying 'Better luck next year!'", BoxColors.Yellow);
             }
 
             public void Open()
