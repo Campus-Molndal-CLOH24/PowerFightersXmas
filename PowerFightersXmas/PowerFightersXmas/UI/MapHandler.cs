@@ -25,7 +25,6 @@ namespace PowerFightersXmas.UI
           "!           !     S      !        !",
           "+------------            ----------",
           "             !  Outside !          ",
-
     };
 
             string livingRoom = currentRoom == "Living Room" ? "🎅" : " ";
