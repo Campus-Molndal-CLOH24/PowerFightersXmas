@@ -11,7 +11,7 @@ namespace PowerFightersXmas.UI
 
     internal class GameDisplay
     {
-        public class ConsoleGameDisplay : IGameDisplay
+        internal class ConsoleGameDisplay : IGameDisplay
         {
             public void PrintCenteredText(string text, ConsoleColor color)
             {
