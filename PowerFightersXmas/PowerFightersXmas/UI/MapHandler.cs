@@ -8,23 +8,22 @@ namespace PowerFightersXmas.UI
 {
     internal class MapHandler
     {
-        public void DisplayMap(string currentRoom)
+        internal void DisplayMap(string currentRoom)
         {
             string[] asciiMap = {
-         "+---------------------------------+",
-          "|  Living   |   Kitchen  | Office |",
-          "|   Room    |            |        |",
-          "|   {0}       |    {1}       |     {2}  |",
-          "|           |            |        |",
-          "|           +            +        |",
-          "|           |            |        |",
-          "|           |            |        |",
-          "!                 ↑           ----+",
-          "!                 N               |",
-          "!           !  W ENTER E |   WC   |",
-          "!           !     S      !        !",
-          "+------------            ----------",
-          "             !  Outside !          ",
+        "+------------------------------------------+",
+        "| Living Room    | Kitchen  | Office       |",
+        "|     {0}         |    {1}     |      {2}       |",
+        "|                |          |              |",
+        "|                |    N     |     N        |",
+        "|                +----------+  \"Choose\"    |",
+        "|                |          |   Door -->   |",
+        "|                |          |              |",
+        "+----------------+----------+--------------+",
+        "      N                 |    WC           |",
+        "      ↑                 |                 |",
+        " W <-   -> E            +-----------------+",
+        "      S                     Outside       "
     };
 
             string livingRoom = currentRoom == "Living Room" ? "🎅" : " ";
