@@ -59,41 +59,6 @@ namespace PowerFightersXmas.Data
                         Console.WriteLine($"- {item.Name}: {item.Description}");
                     }
                 }
-
-                // The code below creates infinite loops so I adjusted it to the above code, let me know if you want me to revert it back to the original code. /NH
-
-                //if (BoxColors.Red == "red")
-                //{
-                //    if (Items.Count == 0)
-                //    {
-                //        Console.WriteLine("it's empty!");
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine($"you found the following items inside {Name}:");
-                //        foreach (var item in Items)
-                //        {
-                //            Console.WriteLine($"- {item.Name}: {item.Description}");
-                //        }
-                //    }
-                //}
-
-
-                //while (BoxColors.Red == "red")
-                //{
-                //    if (Items.Count == 0)
-                //    {
-                //        Console.WriteLine("it's empty!");
-                //    }
-                //    else
-                //    {
-                //        Console.WriteLine($"you found the following items inside {Name}:");
-                //        foreach (var item in Items)
-                //        {
-                //            Console.WriteLine($"- {item.Name}: {item.Description}");
-                //        }
-                //    }
-                //}
             }
         }
     }

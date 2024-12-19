@@ -14,7 +14,7 @@ namespace PowerFightersXmas.UI
          "+---------------------------------+",
           "|  Living   |   Kitchen  | Office |",
           "|   Room    |            |        |",
-          "|           |            |        |",
+          "|   {0}       |    {1}       |     {2}  |",
           "|           |            |        |",
           "|           +            +        |",
           "|           |            |        |",
