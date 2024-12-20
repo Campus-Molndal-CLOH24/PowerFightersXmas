@@ -11,26 +11,27 @@ namespace PowerFightersXmas.UI
         internal void DisplayMap(string currentRoom)
         {
             string[] asciiMap = {
-                "+------------------------------------------+",
-                "| Living Room    | Kitchen  | Office       |",
-                "|      {0}      |    {1}  |      {2}    |",
-                "|                |          |              |          N",
-                "|                +----------+              |          ↑",
-                "| Corridor       | Entrance |   Door -->   |     W <-   -> E",
-                "|      {3}       |    {4}   |              |          ↓",
-                "+----------------+----------+--------------+          S",
-                "| Pool           |",
-                "|      {5}       |",
-                "+----------------+"
-            };
+            "+------------------------------------------+",
+            "| Living Room    | Kitchen  | Office       |",
+            "|      {0}       |    {1}   |      {2}     |",
+            "|                |          |              |          N",
+            "|                +----------+              |          ↑",
+            "| Corridor       | Entrance |   Door -->   |     W <-   -> E",
+            "|      {3}       |    {4}   |              |          ↓",
+            "+----------------+----------+--------------+          S",
+            "| Pool           |",
+            "|      {5}       |",
+            "+----------------+"
+        };
 
-            // Mark the current room with Santa
-            string livingRoom = currentRoom == "Living Room" ? "🎅" : "  ";
-            string kitchen = currentRoom == "Kitchen" ? "🎅" : "  ";
-            string office = currentRoom == "Office" ? "🎅" : "  ";
-            string corridor = currentRoom == "Corridor" ? "🎅" : " ";
-            string entrance = currentRoom == "Entrance" ? "🎅" : " ";
-            string outside = currentRoom == "Outside" ? "🎅" : " ";
+            // Mark the current room with Santa or leave it blank (fixed width)
+            string livingRoom = currentRoom == "Living Room" ? "🎅 " : "   ";
+            string kitchen = currentRoom == "Kitchen" ? "🎅 " : "   ";
+            string office = currentRoom == "Office" ? "🎅 " : "   ";
+            string corridor = currentRoom == "Corridor" ? "🎅 " : "   ";
+            string entrance = currentRoom == "Entrance" ? "🎅 " : "   ";
+            string outside = currentRoom == "Outside" ? "🎅 " : "   ";
+
 
             foreach (string line in asciiMap)
             {
