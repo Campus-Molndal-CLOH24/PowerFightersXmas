@@ -84,6 +84,15 @@ namespace PowerFightersXmas.UI
             }
         }
 
+        internal static void GameWon()
+        {
+            _gameDisplay.DisplayColourMessage("\n\t🎉 You have saved Christmas and the World from the Evil Mage Marcus! 🎉", ConsoleColor.Yellow);
+            _gameDisplay.DisplayColourMessage("\tGreat job! Rudolph walks up to you and happily licks your face..", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\tPress any key to return to the main menu..", ConsoleColor.Yellow);
+            Console.ReadKey();
+            EntryPoint();
+        }
+
         internal static void Instructions(bool isInstructionsMenu)
         {
             _gameDisplay.DisplayColourMessage("\n\t ______________________________________________________", ConsoleColor.Green);
