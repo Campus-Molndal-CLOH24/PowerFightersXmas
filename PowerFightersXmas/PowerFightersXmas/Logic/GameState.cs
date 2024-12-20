@@ -31,17 +31,13 @@ namespace PowerFightersXmas.Logic
         // Showing the current state of the game
         public void ShowState()
         {
-            // Console.WriteLine($"\n\t 🎅 Player: {Player.Name}");
-            Console.WriteLine($"\t 📍 Current room: {CurrentRoom.Name}");
+            Console.WriteLine($"\n\t 📍 Current room: {CurrentRoom.Name}");
             Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
-            // TODO: Print an ASCII map plus mark the current room with a 🎅
-            // Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+            Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
 
             // Print the map of the room
             var mapHandler = new MapHandler();
             mapHandler.DisplayMap(CurrentRoom.Name);
-
-            Console.WriteLine($"\n🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
         }
 
         public List<Item> GetCurrentRoomItems() => CurrentRoom.Items;

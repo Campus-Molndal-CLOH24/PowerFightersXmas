@@ -8,9 +8,9 @@ using static PowerFightersXmas.Data.Item;
 
 namespace PowerFightersXmas.Data
 {
-    internal class add_data
+    internal class AddData
     {
-        public void Adddata()
+        public void AddItems()
         {
             // Created items
             var axe = new Item("An Axe", "A sharp axe that can be used for heavy duties", 1);
@@ -30,6 +30,5 @@ namespace PowerFightersXmas.Data
             redBox.Open();
             yellowBox.Open();
         }
-
     }
 }
