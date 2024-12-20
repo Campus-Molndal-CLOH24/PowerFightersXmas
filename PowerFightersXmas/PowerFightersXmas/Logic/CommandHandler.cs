@@ -51,7 +51,7 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 default:
-                    Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit'.");
+                    Console.WriteLine("Invalid command. Available commands are: 'go', 'look', 'take', 'quit', 'info'.");
                     break;
             }
 
