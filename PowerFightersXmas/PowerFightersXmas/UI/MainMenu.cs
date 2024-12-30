@@ -45,42 +45,68 @@ namespace PowerFightersXmas.UI
 
         internal static void StartNewGame()
         {
-            // Create a new player and the game state, which means the room, items, etc.
-            var player = new Player("Jedi Bob"); // TODO; Implement player creation
-            var gameState = new GameState(player);
-            var commandHandler = new CommandHandler(gameState);
+            Console.Write("Enter your player name: ");
+            string playerName = Console.ReadLine() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(playerName))
+            {
+                Console.WriteLine("Player name cannot be empty.");
+                return;
+            }
 
-            // Console.Clear(); // TODO: Clear the console before starting the game - keep this commented out while in development
-            Console.WriteLine("\n\t🎄 Welcome to the Power Fighters Christmas Adventure! 🎅");
-            Console.WriteLine("\t Get ready to explore and have fun...\n");
-
-            // Show the initial state of the game
-            gameState.ShowState();
-
-            var gameEngine = new GameEngine(gameState, commandHandler);
-            gameEngine.Run();
-
-            SaveOptions(gameState);
+            if (DatabaseManager.PlayerExists(playerName))
+            {
+                Console.WriteLine("Player already exists. Loading game...");
+                var gameState = GameState.LoadGameState(playerName);
+                if (gameState != null) PlayGame(gameState);
+            }
+            else
+            {
+                var player = new Player(playerName);
+                var gameState = new GameState(player);
+                PlayGame(gameState);
+            }
         }
 
         internal static void LoadGame()
         {
-            var gameState = GameState.LoadGameState();
+            Console.Write("Enter your player name to load: ");
+            string playerName = Console.ReadLine() ?? string.Empty;
+            if (string.IsNullOrWhiteSpace(playerName))
+            {
+                Console.WriteLine("Player name cannot be empty.");
+                return;
+            }
+
+            if (!DatabaseManager.PlayerExists(playerName))
+            {
+                Console.WriteLine("Player does not exist. Returning to main menu.");
+                EntryMenu();
+                return;
+            }
+
+            var gameState = GameState.LoadGameState(playerName);
             if (gameState != null)
             {
-                var commandHandler = new CommandHandler(gameState);
-                var gameEngine = new GameEngine(gameState, commandHandler);
-
-                Console.Clear();
-                Console.WriteLine("🎄 Welcome back! Let's continue your adventure. 🎮\n");
-                gameState.ShowState();
-
-                gameEngine.Run();
+                PlayGame(gameState);
             }
             else
             {
-                Console.WriteLine("Returning to the main menu.");
+                Console.WriteLine("Failed to load game. Returning to main menu.");
                 EntryMenu();
+            }
+        }
+
+        private static void PlayGame(GameState gameState)
+        {
+            var commandHandler = new CommandHandler(gameState);
+            var gameEngine = new GameEngine(gameState, commandHandler);
+            gameEngine.Run();
+
+            Console.Write("Do you want to save the game? (Y/N): ");
+            if (Console.ReadLine()?.ToUpper() == "Y")
+            {
+                gameState.SaveGameState();
+                Console.WriteLine("Game saved!");
             }
         }
 

@@ -135,3 +135,8 @@ Absolut sista ordet vill jag lägga till mitt team:
 - Spelmotor-Fixaren Hugo skapade precis det vi behövde, en motor som knöt ihop de olika delarna men höll samtidigt ner det till små hanterbara metoder. När vi skulle knyta ihop våra respektive delar gick det oerhört smidigt och vi behövde knappt röra Hugos kod, den var redan komplett! Super!  
   
 Vilket team, jag är väldigt imponerad av alla tre, de är riktigt duktiga och jag tror de har väldigt bra förutsättningar att bli värdefulla och uppskattade teammedlemmar i den här branschen. Tack, killar!
+
+#### Bonus:
+
+När jag implementerade Save/Load genom SQLite så införde jag även en ny test: TestSaveAndLoadPlayer. Ville bara visa att även det testet går igenom:  
+![testsaveandloadplayer](image-5.png)

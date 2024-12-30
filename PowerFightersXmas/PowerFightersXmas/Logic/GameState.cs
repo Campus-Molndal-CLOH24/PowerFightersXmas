@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace PowerFightersXmas.Logic
 {
+    using Newtonsoft.Json;
     using PowerFightersXmas.Data;
     using PowerFightersXmas.Interface;
     using PowerFightersXmas.UI;
@@ -102,38 +103,30 @@ namespace PowerFightersXmas.Logic
 
         public void SaveGameState()
         {
-            // Serialize the game state to JSON and save it to a file
-            var options = new JsonSerializerOptions
-            {
-                // WriteIndented means that the JSON will be formatted for easier readability, ReferenceHandler.Preserve is used to handle infinate room loops
-                WriteIndented = true,
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
-            };
-
-            // Create the directory if it doesn't exist (it does, but for testing purposes and good habits we check, imagine if it ends up in bin debug again..)
-            var directory = Path.GetDirectoryName(SaveFilePath);
-            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-            {
-                Directory.CreateDirectory(directory);
-            }
-
-            string json = JsonSerializer.Serialize(this, options);
-            File.WriteAllText(SaveFilePath, json);
-            Console.WriteLine("\nGame saved successfully!");
+            string inventoryJson = JsonConvert.SerializeObject(Player.Inventory);
+            DatabaseManager.SavePlayer(Player.Name, inventoryJson, CurrentRoom.Name);
         }
 
-        public static GameState? LoadGameState()
+        public static GameState? LoadGameState(string playerName)
         {
-            if (!File.Exists(SaveFilePath))
+            var playerData = DatabaseManager.LoadPlayer(playerName);
+            if (playerData == null) return null;
+
+            var inventory = JsonConvert.DeserializeObject<List<Item>>(playerData.Value.inventoryJson);
+            var player = new Player(playerName) { Inventory = inventory };
+
+            var room = RoomInformation.FindRoom(playerData.Value.currentRoom);
+            if (room == null)
             {
-                Console.WriteLine("No saved game found.");
-                return null;
+                Console.WriteLine($"Error: Room '{playerData.Value.currentRoom}' not found.");
+                return null; // Throw an exception here if this is a critical error. Is it possible to have a room that doesn't exist?
             }
 
-            // Deserialize the game state from a JSON file
-            string json = File.ReadAllText(SaveFilePath);
-            var gameState = JsonSerializer.Deserialize<GameState>(json);
-            Console.WriteLine("\nGame loaded successfully!");
+            var gameState = new GameState(player)
+            {
+                CurrentRoom = room
+            };
+
             return gameState;
         }
     }

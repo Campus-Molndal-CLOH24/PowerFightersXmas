@@ -20,12 +20,14 @@ namespace PowerFightersXmas.Test
             var mockUserInput = new MockUserInput(new[] { "4" });
             var mockGameDisplay = new MockGameDisplay();
             var inputHandler = new InputHandler(mockUserInput, mockGameDisplay);
+            
             // Act
             inputHandler.EntryMenuInput();
-            // Debug: Print all messages to confirm that the correct message is displayed
-            Console.WriteLine(string.Join(", ", mockGameDisplay.Messages));
+            
             // Assert
-            Assert.IsTrue(mockGameDisplay.Messages.Any(message => message.Contains("Goodbye! Evil Mage Marcus will come and haunt you forever!")));
+            // Assert.IsTrue(mockGameDisplay.Messages.Any(message => message.Contains("Goodbye! Evil Mage Marcus will come and haunt you forever!")));
+            Assert.IsTrue(mockGameDisplay.Messages.Any(message => message.Contains("Goodbye! Evil Mage Marcus will come and haunt you forever!")),
+        $"Expected message not found. Messages: {string.Join(", ", mockGameDisplay.Messages)}");
         }
 
         [TestMethod, Timeout(5000)]
