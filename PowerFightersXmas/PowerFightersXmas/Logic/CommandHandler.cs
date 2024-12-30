@@ -43,8 +43,9 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "quit":
+                    MainMenu.PromptSaveGame(_gameState);
                     Console.WriteLine("🎅 Quitting the game...");
-                    return true; // Signalera att spelet ska avslutas
+                    return true; // Signal to GameEngine that the game should stop
 
                 case "info":
                     MainMenu.Instructions(false);
@@ -55,7 +56,7 @@ namespace PowerFightersXmas.Logic
                     break;
             }
 
-            return false; // Fortsätt spelet
+            return false; // Continue the game
         }
 
         private void HandleGoCommand(string[] parts)

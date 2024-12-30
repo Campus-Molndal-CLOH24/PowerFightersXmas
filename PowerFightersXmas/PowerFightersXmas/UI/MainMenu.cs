@@ -16,13 +16,50 @@ namespace PowerFightersXmas.UI
 
         internal static void EntryPoint()
         {
-            _gameDisplay.PrintCenteredText(" ______________________________________________________", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" | Welcome to the Power Fighters Christmas adventure! |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |                                                    |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |       Press any key to get on with the show..      |", ConsoleColor.Green);
-            _gameDisplay.PrintCenteredText(" |____________________________________________________|", ConsoleColor.Green);
-            Console.ReadKey();
+            Console.Clear();
+
+            string[] frame = {
+        " _______________________________________________________________",
+        " |                                                             |",
+        " |                                                             |",
+        " |                                                             |",
+        " |_____________________________________________________________|"
+    };
+
+            string welcomeText = "🎄 Welcome to the Power Fighters Christmas adventure! 🎅";
+
+            // Dynamic centering
+            int consoleWidth = Console.WindowWidth;
+            int consoleHeight = Console.WindowHeight;
+
+            // Center the frame in the console
+            int frameStartX = (consoleWidth - frame[0].Length) / 2;
+            int frameStartY = (consoleHeight - frame.Length) / 2;
+
+            // Center the text within the frame
+            int textStartX = frameStartX + 1 + (frame[1].Length - 4 - welcomeText.Length) / 2;
+            int textStartY = frameStartY + 2;
+
+            // Print the frame row by row
+            Console.ForegroundColor = ConsoleColor.Red;
+            for (int i = 0; i < frame.Length; i++)
+            {
+                Console.SetCursorPosition(frameStartX, frameStartY + i);
+                Console.WriteLine(frame[i]);
+                System.Threading.Thread.Sleep(100); // Delay between printing different rows in the frame
+            }
+
+            // Write the text with a typewriter style, one by one with a slight delay inbetween each letter
+            Console.ForegroundColor = ConsoleColor.Green;
+            for (int i = 0; i < welcomeText.Length; i++)
+            {
+                Console.SetCursorPosition(textStartX + i, textStartY);
+                Console.Write(welcomeText[i]);
+                System.Threading.Thread.Sleep(50);
+            }
+
+            System.Threading.Thread.Sleep(7000); // Waits seven seconds before closing the entry sign
+            Console.Clear();
             EntryMenu();
         }
 
@@ -35,7 +72,7 @@ namespace PowerFightersXmas.UI
 
             _gameDisplay.DisplayColourMessage("\n\tChoose an option:\n", ConsoleColor.Yellow);
             Console.WriteLine("\t1. Start a new game");
-            Console.WriteLine("\t2. Load a game"); // TODO; This requires us to save game states in a file
+            Console.WriteLine("\t2. Load a game");
             Console.WriteLine("\t3. Help / Instructions on how to play the game");
             _gameDisplay.DisplayColourMessage("\t4. Quit (Why would you ever want to do that..?)\n", ConsoleColor.Red);
 
@@ -100,13 +137,45 @@ namespace PowerFightersXmas.UI
         {
             var commandHandler = new CommandHandler(gameState);
             var gameEngine = new GameEngine(gameState, commandHandler);
-            gameEngine.Run();
 
-            Console.Write("Do you want to save the game? (Y/N): ");
-            if (Console.ReadLine()?.ToUpper() == "Y")
+            while (true)
             {
-                gameState.SaveGameState();
-                Console.WriteLine("Game saved!");
+                // Show the current state of the game
+                gameState.ShowState();
+
+                // Run the game engine, which will handle the player input
+                Console.Write("> "); // Input-prompt
+                string? input = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(input))
+                {
+                    var shouldStop = commandHandler.ProcessCommand(input);
+
+                    // Stop the game if the command handler returns true
+                    if (shouldStop)
+                    {
+                        Console.WriteLine("🎅 The game has ended. Returning to main menu...");
+                        break;
+                    }
+                }
+            }
+        }
+
+        internal static void PromptSaveGame(IGameState gameState)
+        {
+            Console.Write("Do you want to save the game before quitting? (Y/N): ");
+            string? response = Console.ReadLine();
+            if (response?.ToUpper() == "Y")
+            {
+                if (gameState is GameState concreteGameState)
+                {
+                    concreteGameState.SaveGameState(); // Anropa SaveGameState på GameState-objektet
+                    Console.WriteLine("Game saved successfully!");
+                }
+                else
+                {
+                    Console.WriteLine("Error: Unable to save the game. Invalid game state.");
+                }
             }
         }
 
@@ -143,16 +212,6 @@ namespace PowerFightersXmas.UI
             else
             {
                 _gameDisplay.DisplayColourMessage("\n\tReturning to the game.", ConsoleColor.Yellow);
-            }
-        }
-
-        private static void SaveOptions(GameState gameState)
-        {
-            _gameDisplay.DisplayColourMessage("\n\tDo you want to save the game? (Y/N): ", ConsoleColor.Yellow);
-            var saveGame = Console.ReadLine();
-            if (saveGame?.ToUpper() == "Y")
-            {
-                gameState.SaveGameState();
             }
         }
     }

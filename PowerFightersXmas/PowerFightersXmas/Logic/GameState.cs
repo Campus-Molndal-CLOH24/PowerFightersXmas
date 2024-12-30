@@ -110,24 +110,26 @@ namespace PowerFightersXmas.Logic
         public static GameState? LoadGameState(string playerName)
         {
             var playerData = DatabaseManager.LoadPlayer(playerName);
-            if (playerData == null) return null;
+            if (playerData == null)
+            {
+                Console.WriteLine("Player data not found in the database.");
+                return null;
+            }
 
-            var inventory = JsonConvert.DeserializeObject<List<Item>>(playerData.Value.inventoryJson);
+            var inventory = JsonConvert.DeserializeObject<List<Item>>(playerData.Value.inventoryJson) ?? new List<Item>();
             var player = new Player(playerName) { Inventory = inventory };
 
             var room = RoomInformation.FindRoom(playerData.Value.currentRoom);
             if (room == null)
             {
-                Console.WriteLine($"Error: Room '{playerData.Value.currentRoom}' not found.");
-                return null; // Throw an exception here if this is a critical error. Is it possible to have a room that doesn't exist?
+                Console.WriteLine($"Error: Room '{playerData.Value.currentRoom}' not found. Defaulting to Entrance.");
+                room = RoomInformation.InitializeRooms(); // Sätt ett standardrum som t.ex. "Entrance".
             }
 
-            var gameState = new GameState(player)
+            return new GameState(player)
             {
                 CurrentRoom = room
             };
-
-            return gameState;
         }
     }
 }
