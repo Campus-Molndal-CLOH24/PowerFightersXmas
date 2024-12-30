@@ -61,5 +61,35 @@ namespace PowerFightersXmas.Data
 
         /*basement.Items.Add(new Item("Tomteverkstadens nyckel",
          "En nyckel som ser ut att passa i en dörr."));*/
+
+        // Method to find a room by name
+        public static Room FindRoom(string roomName)
+        {
+            // Run InitializeRooms and iterate through all rooms to find the room with the specified name
+            var entrance = InitializeRooms();
+
+            // Recursive method to find the room
+            var visitedRooms = new HashSet<Room>();
+            return FindRoomRecursive(entrance, roomName, visitedRooms);
+        }
+
+        private static Room FindRoomRecursive(Room currentRoom, string roomName, HashSet<Room> visitedRooms)
+        {
+            if (currentRoom.Name.Equals(roomName, StringComparison.OrdinalIgnoreCase))
+                return currentRoom;
+
+            visitedRooms.Add(currentRoom);
+
+            foreach (var exit in currentRoom.Exits.Values)
+            {
+                if (!visitedRooms.Contains(exit))
+                {
+                    var foundRoom = FindRoomRecursive(exit, roomName, visitedRooms);
+                    if (foundRoom != null) return foundRoom;
+                }
+            }
+
+            return null;
+        }
     }
 }
