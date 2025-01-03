@@ -58,10 +58,26 @@ namespace PowerFightersXmas.UI
                 System.Threading.Thread.Sleep(50);
             }
 
-            System.Threading.Thread.Sleep(7000); // Waits seven seconds before closing the entry sign
+            int totalWaitTime = 7000;
+            int elapsedWaitTime = 0;
+            int waitInterval = 100; // Check for key press every 100 milliseconds
+
+            while (elapsedWaitTime < totalWaitTime)
+            {
+                System.Threading.Thread.Sleep(waitInterval);
+                elapsedWaitTime += waitInterval;
+
+                if (Console.KeyAvailable) // Check if any key is pressed
+                {
+                    Console.ReadKey(true); // Consume the key press
+                    break; // Exit the waiting loop
+                }
+            }
+
             Console.Clear();
             EntryMenu();
         }
+
 
         internal static void EntryMenu(bool clearConsole = true)
         {
