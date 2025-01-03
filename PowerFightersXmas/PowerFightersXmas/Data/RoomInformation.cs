@@ -12,7 +12,6 @@ namespace PowerFightersXmas.Data
         {
              // Create the rooms
             var entrance = new Room("Entrance", "Nice house with a lot of rooms... Oh look, Santa!");
-            var coridor = new Room("Corridor", "There is two doors here, bathroom and another door.");
             var outside = new Room("Outside", "It's cold outside, I need to get back in.");
             var wc = new Room("WC", "This is the WC... Eww so dirty.");
             var kitchen = new Room("Kitchen", "This is the kitchen, it's a mess.");
@@ -29,31 +28,23 @@ namespace PowerFightersXmas.Data
             // Connect the rooms
             // from entrance
             entrance.Exits.Add("north", kitchen);
-            entrance.Exits.Add("east", coridor);
-            entrance.Exits.Add("west", livingRoom);
+            entrance.Exits.Add("east", office);
             entrance.Exits.Add("south", outside);
-            //from coridor
-            coridor.Exits.Add("west", entrance);
-            coridor.Exits.Add("north", office);
-            coridor.Exits.Add("south", wc);
+            entrance.Exits.Add("west", livingRoom);
             //from outside
             outside.Exits.Add("north", entrance);
             //from kitchen
             kitchen.Exits.Add("south", entrance);
-            kitchen.Exits.Add("west", livingRoom);
             //from livingroom 
             livingRoom.Exits.Add("up", secondFloor);
             livingRoom.Exits.Add("east", entrance);
-            livingRoom.Exits.Add("north", pool);
             //from second floor
             secondFloor.Exits.Add("down", livingRoom);
-            //from pool 
-            pool.Exits.Add("south", livingRoom);
             //from office
-            office.Exits.Add("south", coridor);
+            office.Exits.Add("west", entrance);
             office.Exits.Add("down", basement);
             //from wc
-            wc.Exits.Add("west", coridor);
+            // wc.Exits.Add("west", );
 
             // Return the entrance room
             return entrance;
