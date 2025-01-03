@@ -55,7 +55,7 @@ namespace PowerFightersXmas.UI
             {
                 Console.SetCursorPosition(textStartX + i, textStartY);
                 Console.Write(welcomeText[i]);
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(20);
             }
 
             int totalWaitTime = 7000;
