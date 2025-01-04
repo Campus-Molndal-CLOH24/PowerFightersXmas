@@ -35,7 +35,7 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "look":
-                    _gameState.ShowState();
+                    // Det behöver inte vara något här
                     break;
 
                 case "take":
