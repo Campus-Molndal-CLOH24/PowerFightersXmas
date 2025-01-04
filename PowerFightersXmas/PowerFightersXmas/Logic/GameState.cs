@@ -25,9 +25,26 @@ namespace PowerFightersXmas.Logic
         // Constructor to initialize the game state
         public GameState(Player player)
         {
-            Player = player;
-            CurrentRoom = RoomInformation.InitializeRooms();
+            
+                Player = player;
+
+            // Initialize rooms
+            Room entrance = RoomInformation.FindRoom("Entrance");
+            Room office = RoomInformation.FindRoom("Office");
+                Room basement = RoomInformation.FindRoom("Basement");
+
+                // Define exits between the rooms
+                office.Exits["down"] = basement;  // Office leads to Basement
+                basement.Exits["up"] = office;    // Basement leads back to Office
+
+                CurrentRoom = entrance;  // Start the player in the Office
+            
+
+
         }
+
+
+
 
         // Showing the current state of the game
         public void ShowState()
@@ -70,16 +87,34 @@ namespace PowerFightersXmas.Logic
         // Flyttar spelaren till ett annat rum
         public string MovePlayer(string direction)
         {
-            var nextRoom = GetRoom(direction);
-            if (nextRoom != null)
-            {
-                CurrentRoom = nextRoom;
-                return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
-            }
-            else
-            {
-                return "You can't go there.";
-            }
+            
+                var nextRoom = GetRoom(direction);
+                if (nextRoom != null)
+                {
+                    CurrentRoom = nextRoom;
+
+                    // Update the map based on the current room
+                    var mapHandler = new MapHandler();
+
+                    if (direction == "down" && CurrentRoom.Name == "Office")
+                    {
+                        // If moving down from the Office to Basement
+                        mapHandler.DisplayMap("Basement"); // Show Basement map
+                    }
+                    else
+                    {
+                        // Otherwise, show the regular map
+                        mapHandler.DisplayMap(CurrentRoom.Name);
+                    }
+
+                    return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
+                }
+                else
+                {
+                    return "You can't go there.";
+                }
+            
+
         }
 
         // Getting a room in a specific direction

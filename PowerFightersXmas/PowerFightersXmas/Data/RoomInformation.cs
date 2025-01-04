@@ -12,7 +12,7 @@ namespace PowerFightersXmas.Data
         {
              // Create the rooms
             var entrance = new Room("Entrance", "Nice house with a lot of rooms... Oh look, Santa!");
-            var outside = new Room("Outside", "It's cold outside, I need to get back in.");
+            var outside = new Room("Outside", "It's cold outside. There is a pool, it's frozen solid... \\n is that an Elf stuck in the ice?!");
             var wc = new Room("WC", "This is the WC... Eww so dirty.");
             var kitchen = new Room("Kitchen", "This is the kitchen, it's a mess.");
             var livingRoom = new Room("Living Room", "A cozy living room with stairs to the second floor.");
@@ -43,6 +43,8 @@ namespace PowerFightersXmas.Data
             //from office
             office.Exits.Add("west", entrance);
             office.Exits.Add("down", basement);
+            //from basement
+            basement.Exits.Add("up", office);
             //from wc
             // wc.Exits.Add("west", );
 
