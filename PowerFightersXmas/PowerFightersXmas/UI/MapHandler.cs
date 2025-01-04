@@ -11,6 +11,7 @@ namespace PowerFightersXmas.UI
         internal void DisplayMap(string currentRoom)
         {
             string[] asciiMap = {
+            "\n",
             "+------------------------------------------+",
             "| Living Room    | Kitchen  | Office       |",
             "|                |          |              |",
@@ -27,7 +28,8 @@ namespace PowerFightersXmas.UI
             "| Pool           |",
             "|                |    {5}",
             "|                |",
-            "+----------------+"
+            "+----------------+",
+            "\n"
         };
 
             // Mark the current room with Santa or leave it blank (fixed width)

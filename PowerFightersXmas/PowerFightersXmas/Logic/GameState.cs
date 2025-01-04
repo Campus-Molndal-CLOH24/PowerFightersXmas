@@ -32,6 +32,7 @@ namespace PowerFightersXmas.Logic
         // Showing the current state of the game
         public void ShowState()
         {
+            
             Console.WriteLine($"\n\t 📍 Current room: {CurrentRoom.Name}");
             Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
             Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
@@ -78,21 +79,17 @@ namespace PowerFightersXmas.Logic
             }
             else
             {
-                return "You can't go there.";
+                return "\nYou can't go there."; // Uppdaterat felmeddelande
             }
         }
 
         // Getting a room in a specific direction
-        private Room GetRoom(string direction)
+        private Room? GetRoom(string direction)
         {
+            // Kontrollera om riktningen finns i Exits, returnera rummet om det finns annars returnera null
             return CurrentRoom.Exits.ContainsKey(direction)
-                ? CurrentRoom.Exits[direction] : new Room("Unknown", "You hit an invisible wall.");
-            // Returning a default room if the direction is invalid, if we want to be able to return null, see below
-
-            //return CurrentRoom.Exits.ContainsKey(direction)
-            //    ? CurrentRoom.Exits[direction] : null;
-
-            // Alternatively, we could throw an exception if the direction is invalid, or have a null check in the MovePlayer method
+                ? CurrentRoom.Exits[direction]
+                : null; // Inga fler "Unknown"-rum skapas
         }
 
         // Lägger till angränsande rum från GameState
