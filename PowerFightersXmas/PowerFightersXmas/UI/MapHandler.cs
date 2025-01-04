@@ -3,13 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace PowerFightersXmas.UI
+internal class MapHandler
 {
-    internal class MapHandler
+    internal void DisplayMap(string currentRoom)
     {
-        internal void DisplayMap(string currentRoom)
+        if (currentRoom == "Basement")
         {
+            Console.WriteLine(
+           "+------------------------------------------+" +
+           "\n|                                          |" +
+           "\n|                                          |" +
+           "\n|                                          |" +
+           "\n|                  Basement                |          N" +
+           "\n|                    🎅                    |          ↑" +
+           "\n|                                          |     W <-   -> E" +
+           "\n|                                          |          ↓" +
+           "\n|                                          |          S" +
+           "\n|                                          |" +
+           "\n+----------------+----  ----+--------------+"
+       );
+
+        }
+        else
+        {
+            // Display Main Map (for Office, Living Room, etc.)
             string[] asciiMap = {
             "+------------------------------------------+",
             "| Living Room    | Kitchen  | Office       |",
@@ -37,7 +54,6 @@ namespace PowerFightersXmas.UI
             string corridor = currentRoom == "Corridor" ? "🎅 " : "   ";
             string entrance = currentRoom == "Entrance" ? "🎅 " : "   ";
             string outside = currentRoom == "Outside" ? "🎅 " : "   ";
-
 
             foreach (string line in asciiMap)
             {
