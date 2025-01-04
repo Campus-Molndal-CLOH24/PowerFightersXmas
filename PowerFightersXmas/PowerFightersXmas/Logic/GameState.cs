@@ -25,12 +25,8 @@ namespace PowerFightersXmas.Logic
         // Constructor to initialize the game state
         public GameState(Player player)
         {
-
                 Player = player;
                 CurrentRoom = RoomInformation.InitializeRooms();
-
-
-
         }
 
 
