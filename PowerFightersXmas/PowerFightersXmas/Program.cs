@@ -12,7 +12,11 @@ namespace PowerFightersXmas
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8; // Activate UTF-8 so we can use emojis and icons
+
+            Console.WriteLine("Main started. Initializing database...");
             DatabaseManager.InitializeDatabase();
+            Console.WriteLine("Database initialization completed.");
+            DatabaseManager.PopulateRoomItems();
             MainMenu.EntryPoint();
         }
     }

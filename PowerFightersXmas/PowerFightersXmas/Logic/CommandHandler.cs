@@ -1,4 +1,5 @@
-﻿using PowerFightersXmas.Interface;
+﻿using PowerFightersXmas.Data;
+using PowerFightersXmas.Interface;
 using PowerFightersXmas.UI;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace PowerFightersXmas.Logic
                     break;
 
                 case "look":
-                    _gameState.ShowState();
+                    // Det behöver inte vara något här
                     break;
 
                 case "take":
@@ -76,9 +77,22 @@ namespace PowerFightersXmas.Logic
                     .FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
 
                 if (item != null)
+                {
+                    // Lägg till itemet i spelarens inventory
                     Console.WriteLine(_gameState.AddItemToPlayerInventory(item));
+
+                    // Ta bort itemet från rummet (runtime)
+                    _gameState.CurrentRoom.Items.Remove(item);
+
+                    // Spara plockat objekt i databasen
+                    DatabaseManager.AddPickedUpItem(_gameState.Player.Name, item.Name);
+
+                    Console.WriteLine($"You have taken the {item.Name}.");
+                }
                 else
+                {
                     Console.WriteLine($"There is no '{itemName}' here.");
+                }
             }
             else
             {

@@ -10,7 +10,7 @@ namespace PowerFightersXmas.Data
     public class Player
     {
         public string Name { get; set; }
-         public List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
 
     //For npc
     //public int ID { get; set; } 

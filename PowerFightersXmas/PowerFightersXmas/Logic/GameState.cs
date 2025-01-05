@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PowerFightersXmas.Data;
+using PowerFightersXmas.Interface;
 
 namespace PowerFightersXmas.Logic
 {
-    using Newtonsoft.Json;
-    using PowerFightersXmas.Data;
-    using PowerFightersXmas.Interface;
-    using PowerFightersXmas.UI;
-
     public class GameState : IGameState
     {
         // Central datastructure for the game state
@@ -20,25 +14,35 @@ namespace PowerFightersXmas.Logic
 
         // Inventory property to get the player's inventory
         public List<Item> Inventory => Player.Inventory;
-        private const string SaveFilePath = "./docs/savegame.json";
 
         // Constructor to initialize the game state
         public GameState(Player player)
         {
-                Player = player;
-                CurrentRoom = RoomInformation.InitializeRooms();
+            Player = player;
+            CurrentRoom = RoomInformation.InitializeRooms(player.Name); // Dynamiskt laddning av rum och föremål
         }
-
-
-
 
         // Showing the current state of the game
         public void ShowState()
         {
-            
             Console.WriteLine($"\n\t 📍 Current room: {CurrentRoom.Name}");
             Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
             Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
+
+            // Dynamiskt hämta synliga föremål från databasen
+            var visibleItems = DatabaseManager.GetRoomItems(CurrentRoom.Name, Player.Name);
+            if (visibleItems.Any())
+            {
+                Console.WriteLine($"\t 📦 Items in room:");
+                foreach (var item in visibleItems)
+                {
+                    Console.WriteLine($"\t - {item.Name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"\t 📦 There are no items in this room.");
+            }
 
             // Print the map of the room
             var mapHandler = new MapHandler();
@@ -54,12 +58,13 @@ namespace PowerFightersXmas.Logic
             {
                 Player.Inventory.Add(item);
                 CurrentRoom.Items.Remove(item);
+                DatabaseManager.AddPickedUpItem(Player.Name, item.Name); // Markera föremålet som plockat i databasen
                 return $"You have picked up {item.Name}.";
             }
             return "Your inventory is full!";
         }
 
-        // Remove an object from the players inventory
+        // Remove an object from the player's inventory
         public string RemoveItemFromPlayerInventory(Item item)
         {
             if (Player.Inventory.Contains(item))
@@ -74,34 +79,16 @@ namespace PowerFightersXmas.Logic
         // Flyttar spelaren till ett annat rum
         public string MovePlayer(string direction)
         {
-            
-                var nextRoom = GetRoom(direction);
-                if (nextRoom != null)
-                {
-                    CurrentRoom = nextRoom;
-
-                    // Update the map based on the current room
-                    var mapHandler = new MapHandler();
-
-                    if (direction == "down" && CurrentRoom.Name == "Office")
-                    {
-                        // If moving down from the Office to Basement
-                        mapHandler.DisplayMap("Basement"); // Show Basement map
-                    }
-                    else
-                    {
-                        // Otherwise, show the regular map
-                        mapHandler.DisplayMap(CurrentRoom.Name);
-                    }
-
-                    return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
-                }
-                else
-                {
-                    return "You can't go there.";
-                }
-            
-
+            var nextRoom = GetRoom(direction);
+            if (nextRoom != null)
+            {
+                CurrentRoom = nextRoom;
+                return $"You walk {direction} and now find yourself in {CurrentRoom.Name}.";
+            }
+            else
+            {
+                return "You can't go there.";
+            }
         }
 
         // Getting a room in a specific direction
@@ -121,12 +108,20 @@ namespace PowerFightersXmas.Logic
 
         public void SaveGameState()
         {
-            string inventoryJson = JsonConvert.SerializeObject(Player.Inventory);
+            Console.WriteLine("Saving game state to SQLite database...");
+
+            // Skapa en lista med endast föremålsnamn
+            var inventoryNames = Player.Inventory.Select(item => item.Name).ToList();
+            string inventoryJson = JsonConvert.SerializeObject(inventoryNames);
+            Console.WriteLine($"Serialized inventory (names only): {inventoryJson}");
+
             DatabaseManager.SavePlayer(Player.Name, inventoryJson, CurrentRoom.Name);
+            Console.WriteLine("Game state saved to database.");
         }
 
         public static GameState? LoadGameState(string playerName)
         {
+            Console.WriteLine($"Loading game state for player: {playerName} from SQLite database...");
             var playerData = DatabaseManager.LoadPlayer(playerName);
             if (playerData == null)
             {
@@ -134,20 +129,21 @@ namespace PowerFightersXmas.Logic
                 return null;
             }
 
-            var inventory = JsonConvert.DeserializeObject<List<Item>>(playerData.Value.inventoryJson) ?? new List<Item>();
+            // Deserialisera inventariet (föremålsnamn)
+            var inventoryNames = JsonConvert.DeserializeObject<List<string>>(playerData.Value.inventoryJson) ?? new List<string>();
+            var inventory = inventoryNames.Select(name => new Item { Name = name }).ToList(); // Skapa nya föremål med bara namn
+
             var player = new Player(playerName) { Inventory = inventory };
 
-            var room = RoomInformation.FindRoom(playerData.Value.currentRoom);
+            // Dynamiskt hämta aktuellt rum för spelaren
+            var room = RoomInformation.FindRoom(playerData.Value.currentRoom, playerName);
             if (room == null)
             {
                 Console.WriteLine($"Error: Room '{playerData.Value.currentRoom}' not found. Defaulting to Entrance.");
-                room = RoomInformation.InitializeRooms(); // Sätt ett standardrum som t.ex. "Entrance".
+                room = RoomInformation.InitializeRooms(playerName);
             }
 
-            return new GameState(player)
-            {
-                CurrentRoom = room
-            };
+            return new GameState(player) { CurrentRoom = room };
         }
     }
 }
