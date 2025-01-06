@@ -14,17 +14,44 @@ namespace PowerFightersXmas.Logic
 
         // Inventory property to get the player's inventory
         public List<Item> Inventory => Player.Inventory;
-
+        public string? DecorateMessage { get; set; }
         // Constructor to initialize the game state
         public GameState(Player player)
         {
             Player = player;
             CurrentRoom = RoomInformation.InitializeRooms(player.Name); // Dynamiskt laddning av rum och föremål
         }
+        private void DisplayQuestLog()
+        {
+            // Lista över quest-items
+            var questItems = new List<string>
+    {
+        "Glitter",
+        "Christmas baubles",
+        "Christmas tree lights",
+        "Christmas tree star"
+    };
 
+            Console.WriteLine("\n\t 🎄 Quest: Decorate the Christmas Tree!");
+            Console.WriteLine("\t - Decorations needed:");
+
+            // Kontrollera vilka föremål som finns i spelarens inventory
+            foreach (var item in questItems)
+            {
+                if (Player.Inventory.Any(i => i.Name == item))
+                {
+                    Console.WriteLine($"\t ✅ {item} (collected)");
+                }
+                else
+                {
+                    Console.WriteLine($"\t ❌ {item}");
+                }
+            }
+        }
         // Showing the current state of the game
         public void ShowState()
         {
+            DisplayQuestLog();
             Console.WriteLine($"\n\t 📍 Current room: {CurrentRoom.Name}");
             Console.WriteLine($"\t 🗺️ Description: {CurrentRoom.Description}");
             Console.WriteLine($"\t 🎁 Inventory: {string.Join(", ", Player.Inventory.Select(i => i.Name))}");
@@ -47,6 +74,13 @@ namespace PowerFightersXmas.Logic
             // Print the map of the room
             var mapHandler = new MapHandler();
             mapHandler.DisplayMap(CurrentRoom.Name);
+
+            // Skriv ut dekorationsmeddelandet sist
+            if (!string.IsNullOrEmpty(DecorateMessage))
+            {
+                Console.WriteLine(DecorateMessage);
+                DecorateMessage = null; // Töm meddelandet för att undvika att det skrivs ut igen
+            }
         }
 
         public List<Item> GetCurrentRoomItems() => CurrentRoom.Items;

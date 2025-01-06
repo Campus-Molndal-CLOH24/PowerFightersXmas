@@ -35,8 +35,8 @@ namespace PowerFightersXmas.Logic
                     HandleGoCommand(parts);
                     break;
 
-                case "look":
-                    // Det behöver inte vara något här
+                case "decorate":
+                    HandleDecorateCommand();
                     break;
 
                 case "take":
@@ -66,6 +66,40 @@ namespace PowerFightersXmas.Logic
                 Console.WriteLine(_gameState.MovePlayer(parts[1]));
             else
                 Console.WriteLine("Please specify a direction, e.g., 'go north'.");
+        }
+
+        
+        private void HandleDecorateCommand()
+        {
+            // Kontrollera att spelaren är i rätt rum
+            if (_gameState.CurrentRoom.Name != "Living Room")
+            {
+                _gameState.DecorateMessage = "\n❌ You must be in the Living Room to decorate the Christmas Tree.";
+                return;
+            }
+
+            // Lista över föremål som behövs för att dekorera granen
+            var requiredItems = new List<string>
+    {
+        "Glitter",
+        "Christmas baubles",
+        "Christmas tree lights",
+        "Christmas tree star"
+    };
+
+            // Kontrollera om spelaren har alla föremål
+            bool hasAllItems = requiredItems.All(item => _gameState.Player.Inventory.Any(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase)));
+
+            if (hasAllItems)
+            {
+                _gameState.DecorateMessage = "\n🎄 Congratulations! You have successfully decorated the Christmas Tree!" +
+                                             "\nThe house is now full of holiday cheer. You have completed your mission!";
+            }
+            else
+            {
+                _gameState.DecorateMessage = "\n❌ You need all the ornaments to decorate the tree." +
+                                             "\nKeep exploring to find the missing items.";
+            }
         }
 
         private void HandleTakeCommand(string[] parts)
