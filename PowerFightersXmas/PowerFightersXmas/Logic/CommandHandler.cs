@@ -35,6 +35,7 @@ namespace PowerFightersXmas.Logic
                     HandleGoCommand(parts);
                     break;
 
+
                 case "decorate":
                     HandleDecorateCommand();
                     break;

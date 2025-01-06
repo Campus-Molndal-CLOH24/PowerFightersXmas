@@ -109,6 +109,7 @@ namespace PowerFightersXmas.Logic
         }
 
         // Flyttar spelaren till ett annat rum
+        // Flyttar spelaren till ett annat rum
         public string MovePlayer(string direction)
         {
             var nextRoom = GetRoom(direction);
