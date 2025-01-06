@@ -56,11 +56,21 @@ namespace PowerFightersXmas.Logic
         {
             if (Player.Inventory.Count < 5) // Max inventory size is 5
             {
+                // Lägg till föremålet i spelarens inventarie
                 Player.Inventory.Add(item);
+
+                // Ta bort föremålet från det aktuella rummet
                 CurrentRoom.Items.Remove(item);
-                DatabaseManager.AddPickedUpItem(Player.Name, item.Name); // Markera föremålet som plockat i databasen
+
+                // Markera föremålet som upplockat i databasen
+                DatabaseManager.AddPickedUpItem(Player.Name, item.Name);
+
+                // Auto-spara spelets tillstånd
+                SaveGameState();
+
                 return $"You have picked up {item.Name}.";
             }
+
             return "Your inventory is full!";
         }
 

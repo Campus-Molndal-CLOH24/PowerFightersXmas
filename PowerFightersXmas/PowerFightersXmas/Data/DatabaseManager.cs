@@ -101,12 +101,12 @@ namespace PowerFightersXmas.Data
                 connection.Open();
 
                 string insertRoomItems = @"
-        INSERT OR IGNORE INTO RoomItems (RoomName, ItemName)
-        VALUES
-        ('Entrance', 'An Axe'),
-        ('Kitchen', 'A Sock Full of Coal'),
-        ('Office', 'A Key'),
-        ('Basement', 'A Lamp');";
+                INSERT OR IGNORE INTO RoomItems (RoomName, ItemName)
+                VALUES
+                ('Entrance', 'An Axe'),
+                ('Kitchen', 'A Sock Full of Coal'),
+                ('Office', 'A Key'),
+                ('Basement', 'A Lamp');";
 
                 using (var command = new SQLiteCommand(insertRoomItems, connection))
                 {
