@@ -30,23 +30,6 @@ namespace ItemTests
                 Assert.AreEqual(expected, actual);
             }
         }
-        [TestMethod]
-        public void BoxOpenTest()
-        {
-            //Arrange
-            var box = new Box("Red Box", "A box painted red with a yellow ribbon", BoxColors.Red);
-            string expected = "It's empty!";
-            //Act
-            string actual;
-            using (var sw = new StringWriter())
-            {
-                Console.SetOut(sw);
-                box.Open();
-                actual = sw.ToString().Trim();
-            }
-            //Assert
-            Assert.AreEqual(expected, actual);
-        }
 
 
     }

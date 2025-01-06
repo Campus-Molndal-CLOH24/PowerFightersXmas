@@ -21,6 +21,8 @@ namespace PowerFightersXmas.Logic
             _isRunning = true;
         }
 
+        public bool IsRunning => _isRunning;
+
         public void Run()
         {  
             // Main game loop
@@ -44,7 +46,7 @@ namespace PowerFightersXmas.Logic
         public void StopGame()
         {
             _isRunning = false;
-            Console.WriteLine("🎅 The game has been stopped. Goodbye!");
+            Console.WriteLine("The game has been stopped. Goodbye!");
         }
     }
 }

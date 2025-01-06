@@ -11,6 +11,8 @@ namespace PowerFightersXmas.Interface
     {
         Player Player { get; }
         Room CurrentRoom { get; }
+        string DecorateMessage { get; set; }
+
         string MovePlayer(string direction);
         void ShowState();
         List<Item> GetCurrentRoomItems();

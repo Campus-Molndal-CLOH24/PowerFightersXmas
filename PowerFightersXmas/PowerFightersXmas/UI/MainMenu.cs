@@ -197,9 +197,9 @@ namespace PowerFightersXmas.UI
 
         internal static void GameWon()
         {
-            _gameDisplay.DisplayColourMessage("\n\t🎉 You have saved Christmas and the World from the Evil Mage Marcus! 🎉", ConsoleColor.Yellow);
-            _gameDisplay.DisplayColourMessage("\tGreat job! Rudolph walks up to you and happily licks your face..", ConsoleColor.Green);
-            _gameDisplay.DisplayColourMessage("\tPress any key to return to the main menu..", ConsoleColor.Yellow);
+            _gameDisplay.DisplayColourMessage("\n\t🎄 Congratulations! You have successfully decorated the Christmas Tree!", ConsoleColor.Yellow);
+            _gameDisplay.DisplayColourMessage("\tThe house is now full of holiday cheer. You have completed your mission!", ConsoleColor.Yellow);
+            _gameDisplay.DisplayColourMessage("\tPress any key to return to the main menu..", ConsoleColor.Gray);
             Console.ReadKey();
             EntryPoint();
         }
@@ -212,7 +212,7 @@ namespace PowerFightersXmas.UI
             _gameDisplay.DisplayColourMessage("\t |____________________________________________________|", ConsoleColor.Green);
 
             _gameDisplay.DisplayColourMessage("\n\tGo + direction (north, south, east, west, up, down) will help you move between rooms.", ConsoleColor.Cyan);
-            _gameDisplay.DisplayColourMessage("\tLook will show you the current room and its contents.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\tDecorate when you've got all the ornaments and are in the Livingroom completes the game.", ConsoleColor.Cyan);
             _gameDisplay.DisplayColourMessage("\tTake + item name will help you pick up items in the room.", ConsoleColor.Cyan);
             _gameDisplay.DisplayColourMessage("\tQuit will exit the game.", ConsoleColor.Cyan);
             _gameDisplay.DisplayColourMessage("\tType info while in the game to display these instructions again.", ConsoleColor.Cyan);

@@ -23,9 +23,11 @@ public class GameEngineTests
             gameEngine.StopGame();
 
             // Assert
-            StringAssert.Contains(output.ToString(), "The game has been stopped. Goodbye!");
-            // Ensure no additional commands were processed
-            // Note: We can't directly access `_isRunning` unless it is exposed as a public property.
+            // Kontrollera att rätt meddelande skrivs ut
+            StringAssert.Contains(output.ToString().Trim(), "The game has been stopped. Goodbye!");
+
+            // Kontrollera att IsRunning är false
+            Assert.IsFalse(gameEngine.IsRunning, "The game engine should stop running.");
         }
     }
 

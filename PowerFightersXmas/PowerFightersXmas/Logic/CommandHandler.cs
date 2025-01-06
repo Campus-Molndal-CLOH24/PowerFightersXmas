@@ -1,4 +1,5 @@
-﻿using PowerFightersXmas.Interface;
+﻿using PowerFightersXmas.Data;
+using PowerFightersXmas.Interface;
 using PowerFightersXmas.UI;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,9 @@ namespace PowerFightersXmas.Logic
                     HandleGoCommand(parts);
                     break;
 
-                case "look":
-                    // Det behöver inte vara något här
+
+                case "decorate":
+                    HandleDecorateCommand();
                     break;
 
                 case "take":
@@ -67,6 +69,40 @@ namespace PowerFightersXmas.Logic
                 Console.WriteLine("Please specify a direction, e.g., 'go north'.");
         }
 
+        
+        private void HandleDecorateCommand()
+        {
+            // Kontrollera att spelaren är i rätt rum
+            if (_gameState.CurrentRoom.Name != "Living Room")
+            {
+                _gameState.DecorateMessage = "\n❌ You must be in the Living Room to decorate the Christmas Tree.";
+                return;
+            }
+
+            // Lista över föremål som behövs för att dekorera granen
+            var requiredItems = new List<string>
+    {
+        "Glitter",
+        "Christmas baubles",
+        "Christmas tree lights",
+        "Christmas tree star"
+    };
+
+            // Kontrollera om spelaren har alla föremål
+            bool hasAllItems = requiredItems.All(item => _gameState.Player.Inventory.Any(i => i.Name.Equals(item, StringComparison.OrdinalIgnoreCase)));
+
+            if (hasAllItems)
+            {
+                Console.Clear();
+                MainMenu.GameWon(); // Anropa GameWon istället för att visa meddelandet direkt
+            }
+            else
+            {
+                _gameState.DecorateMessage = "\n❌ You need all the ornaments to decorate the tree." +
+                                             "\nKeep exploring to find the missing items.";
+            }
+        }
+
         private void HandleTakeCommand(string[] parts)
         {
             if (parts.Length > 1)
@@ -76,9 +112,22 @@ namespace PowerFightersXmas.Logic
                     .FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
 
                 if (item != null)
+                {
+                    // Lägg till itemet i spelarens inventory
                     Console.WriteLine(_gameState.AddItemToPlayerInventory(item));
+
+                    // Ta bort itemet från rummet (runtime)
+                    _gameState.CurrentRoom.Items.Remove(item);
+
+                    // Spara plockat objekt i databasen
+                    DatabaseManager.AddPickedUpItem(_gameState.Player.Name, item.Name);
+
+                    Console.WriteLine($"You have taken the {item.Name}.");
+                }
                 else
+                {
                     Console.WriteLine($"There is no '{itemName}' here.");
+                }
             }
             else
             {
