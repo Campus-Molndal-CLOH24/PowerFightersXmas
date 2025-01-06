@@ -92,8 +92,8 @@ namespace PowerFightersXmas.Logic
 
             if (hasAllItems)
             {
-                _gameState.DecorateMessage = "\n🎄 Congratulations! You have successfully decorated the Christmas Tree!" +
-                                             "\nThe house is now full of holiday cheer. You have completed your mission!";
+                Console.Clear();
+                MainMenu.GameWon(); // Anropa GameWon istället för att visa meddelandet direkt
             }
             else
             {

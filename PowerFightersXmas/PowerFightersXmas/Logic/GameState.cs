@@ -108,18 +108,6 @@ namespace PowerFightersXmas.Logic
             return "Your inventory is full!";
         }
 
-        // Remove an object from the player's inventory
-        public string RemoveItemFromPlayerInventory(Item item)
-        {
-            if (Player.Inventory.Contains(item))
-            {
-                Player.Inventory.Remove(item);
-                CurrentRoom.Items.Add(item);
-                return $"You have dropped {item.Name}.";
-            }
-            return "You don't have that item!";
-        }
-
         // Flyttar spelaren till ett annat rum
         public string MovePlayer(string direction)
         {

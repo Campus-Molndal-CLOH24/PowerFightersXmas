@@ -3,12 +3,6 @@ using System.Collections.Generic;
 
 namespace PowerFightersXmas.Data
 {
-    public static class BoxColors
-    {
-        public const string Red = "Red";
-        public const string Yellow = "Yellow";
-    }
-
     public class Item
     {
         public string Name { get; set; }
@@ -34,22 +28,6 @@ namespace PowerFightersXmas.Data
             Console.WriteLine($"Name: {Name}");
             Console.WriteLine($"Description: {Description}");
             Console.WriteLine($"Quantity: {Quantity}");
-        }
-
-        public class Box
-        {
-            public string Name { get; set; }
-            public string Description { get; set; }
-            public string Colour { get; set; }
-            public List<Item> Items { get; set; } = new List<Item>();
-
-            public Box(string name, string description, string colour)
-            {
-                Name = name;
-                Description = description;
-                Colour = colour;
-                Items = new List<Item>();  
-            }
         }
     }
 }

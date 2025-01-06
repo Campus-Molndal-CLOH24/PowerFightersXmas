@@ -13,7 +13,6 @@ namespace PowerFightersXmas.Data
             // Create the rooms
             var entrance = new Room("Entrance", "Nice house with a lot of rooms... Oh look, Santa!");
             var outside = new Room("Outside", "It's cold outside. There is a pool, it's frozen solid... \\n is that an Elf stuck in the ice?!");
-            var wc = new Room("WC", "This is the WC... Eww so dirty.");
             var kitchen = new Room("Kitchen", "This is the kitchen, it's a mess.");
             var livingRoom = new Room("Living Room", "A cozy living room with stairs to the second floor.");
             var pool = new Room("Outdoor Pool", "This is a pool, it's frozen solid... \n is that an Elf stuck in the ice?");

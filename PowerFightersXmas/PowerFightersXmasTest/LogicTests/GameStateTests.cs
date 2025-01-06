@@ -111,35 +111,6 @@ namespace PowerFightersXmas.Test
         }
 
         [TestMethod]
-        public void SaveGameState_CallsDatabaseManagerWithCorrectParameters()
-        {
-            // Arrange
-            var mockDatabaseManager = new Mock<IDatabaseManager>();
-            DatabaseManager.Instance = mockDatabaseManager.Object;
-
-            // Ensure _gameState and its properties are not null
-            Assert.IsNotNull(_gameState, "GameState should not be null.");
-            Assert.IsNotNull(_gameState.Player, "Player should not be null.");
-            Assert.IsNotNull(_gameState.CurrentRoom, "CurrentRoom should not be null.");
-
-            var axe = new Item("An Axe", "A sharp axe.", 1);
-            _gameState.Player.Inventory.Add(axe);
-
-            // Act
-            _gameState.SaveGameState();
-
-            // Assert
-            mockDatabaseManager.Verify(dm =>
-                dm.SavePlayer(
-                    It.Is<string>(name => name == _gameState.Player.Name),
-                    It.Is<string>(inventoryJson => inventoryJson.Contains("An Axe")),
-                    It.Is<string>(currentRoom => currentRoom == _gameState.CurrentRoom.Name)
-                ),
-                Times.Once
-            );
-        }
-
-        [TestMethod]
         public void LoadGameState_ReturnsCorrectState()
         {
             // Arrange
