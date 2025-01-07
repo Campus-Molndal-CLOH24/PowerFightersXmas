@@ -197,9 +197,9 @@ namespace PowerFightersXmas.UI
 
         internal static void GameWon()
         {
-            _gameDisplay.DisplayColourMessage("\n\t🎄 Congratulations! You have successfully decorated the Christmas Tree!", ConsoleColor.Yellow);
-            _gameDisplay.DisplayColourMessage("\tThe house is now full of holiday cheer. You have completed your mission!", ConsoleColor.Yellow);
-            _gameDisplay.DisplayColourMessage("\tPress any key to return to the main menu..", ConsoleColor.Gray);
+            _gameDisplay.DisplayColourMessage("\n\t🎄 Congratulations! You have successfully decorated the Christmas Tree!", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\tThe house is now full of holiday cheer. You have completed your mission!", ConsoleColor.Green);
+            _gameDisplay.DisplayColourMessage("\tPress any key to return to the main menu..", ConsoleColor.Yellow);
             Console.ReadKey();
             EntryPoint();
         }
@@ -211,11 +211,11 @@ namespace PowerFightersXmas.UI
             _gameDisplay.DisplayColourMessage("\t |        Instructions on how to play the game        |", ConsoleColor.Green);
             _gameDisplay.DisplayColourMessage("\t |____________________________________________________|", ConsoleColor.Green);
 
-            _gameDisplay.DisplayColourMessage("\n\tGo + direction (north, south, east, west, up, down) will help you move between rooms.", ConsoleColor.Cyan);
-            _gameDisplay.DisplayColourMessage("\tDecorate when you've got all the ornaments and are in the Livingroom completes the game.", ConsoleColor.Cyan);
-            _gameDisplay.DisplayColourMessage("\tTake + item name will help you pick up items in the room.", ConsoleColor.Cyan);
-            _gameDisplay.DisplayColourMessage("\tQuit will exit the game.", ConsoleColor.Cyan);
-            _gameDisplay.DisplayColourMessage("\tType info while in the game to display these instructions again.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\n\t|Go| + direction (north, south, east, west, up, down) will help you move between rooms.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\n\t|Decorate| when you've got all the ornaments and are in the Livingroom completes the game.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\n\t|Take| + item name will help you pick up items in the room.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\n\t|Quit| will exit the game.", ConsoleColor.Cyan);
+            _gameDisplay.DisplayColourMessage("\n\t|Info| while in the game to display these instructions again.", ConsoleColor.Cyan);
 
             _gameDisplay.DisplayColourMessage("\n\tPress any key to continue..", ConsoleColor.Yellow);
             Console.ReadKey();
